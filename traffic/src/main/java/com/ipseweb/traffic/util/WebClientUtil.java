@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientException;
 
 import java.util.function.Consumer;
 
@@ -17,31 +18,44 @@ public class WebClientUtil {
         this.webClient = webClient;
     }
 
-    public String get(String url) {
-        String response;
+    public Object get(String url) {
+        log.info("url: {}", url);
 
-        response = webClient.get()
-                .uri(url)
-                .retrieve().bodyToMono(String.class).subscribe().toString();
+        Object response = null;
+
+        try {
+            response = webClient.get()
+                    .uri(url)
+                    .retrieve()
+                    .bodyToMono(Object.class).block();
+        } catch (WebClientException e) {
+            log.error(e.getMessage());
+        }
 
         log.info("response: {}", response);
 
         return response;
     }
 
-    public String get(String url, Consumer<HttpHeaders> headers) {
-        String response;
+    public Object get(String url, Consumer<HttpHeaders> headers) {
+        log.info("url: {}", url);
 
-        response = webClient.get()
-                .uri(url)
-                .headers(httpHeaders -> headers.accept(httpHeaders))
-                .retrieve().bodyToMono(String.class).subscribe().toString();
+        Object response = null;
 
-        log.info("response: {}", response.getBytes());
+        try {
+            response = webClient.get()
+                    .uri(url)
+                    .headers(headers)
+                    .retrieve()
+                    .bodyToMono(String.class).block();
+        } catch (WebClientException e) {
+            log.error(e.getMessage());
+        }
+
+        log.info("response: {}", response);
 
         return response;
     }
 
     public String post() {return "";}
-
 }

@@ -4,8 +4,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/ipse
-    username: postgres
-    password: qwe123
+    username: seungbinyang
+    password: fds
 
   jpa:
     hibernate:
@@ -17,6 +17,12 @@ spring:
         show_sql: true
 
     defer-datasource-initialization: true
+
+  openapi:
+    subway:
+      apiKey: ENC(ZHhyrqpYzuxZ09onTfn+eIboFAcR6JMQZG5l8kPnTGXeli0io2uSgEbXkUgGKQn8)
+      url:
+        arrivalInfo: http://swopenAPI.seoul.go.kr/api/subway/%s/json/realtimeStationArrival/%s/%s/%s
 
   sql:
     init:

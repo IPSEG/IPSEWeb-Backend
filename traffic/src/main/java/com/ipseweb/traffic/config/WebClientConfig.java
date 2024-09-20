@@ -8,7 +8,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import reactor.netty.http.client.HttpClient;
 
-
 @Configuration
 public class WebClientConfig {
 
@@ -16,6 +15,7 @@ public class WebClientConfig {
 
     HttpClient httpClient = HttpClient.create()
             .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10000);
+
     @Bean
     public WebClient webClient() {
         return WebClient.builder()

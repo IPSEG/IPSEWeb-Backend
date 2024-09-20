@@ -1,12 +1,17 @@
 package com.ipseweb.traffic.service;
 
 import com.ipseweb.traffic.util.WebClientUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class SubwayService {
+
+    @Value("${spring.openapi.subway.apiKey}")
+    private String apiKey;
+
+    @Value("${spring.openapi.subway.url.arrivalInfo}")
+    private String arrivalInfoUrl;
 
     WebClientUtil webClientUtil;
 
@@ -15,8 +20,7 @@ public class SubwayService {
     }
 
     public void getStationArrivalInfo(String stationName) {
-
-        String url = "http://swopenAPI.seoul.go.kr/api/subway/sample/json/realtimeStationArrival/0/10/양재";
-        String response = webClientUtil.get(url);
+        String url = String.format(arrivalInfoUrl, apiKey, 0, 8, stationName);
+        Object response = webClientUtil.get(url);
     }
 }
