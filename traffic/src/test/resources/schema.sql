@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS tb_bus_stop
 
     bus_stop_name            text not null,
 
-    information_collect_date timestamptz default now(),
+    information_collect_date timestamp default now(),
 
     city                     text,
 

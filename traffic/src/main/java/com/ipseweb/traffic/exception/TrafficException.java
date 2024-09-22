@@ -1,6 +1,6 @@
 package com.ipseweb.traffic.exception;
 
-import com.ipseweb.traffic.dto.ErrorCode;
+import com.ipseweb.traffic.dto.error.ErrorCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

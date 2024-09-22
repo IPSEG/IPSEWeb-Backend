@@ -1,7 +1,7 @@
 //package com.ipseweb.traffic.repository;
 //
 //import com.ipseweb.traffic.domain.StationArrivalInfo;
-//import com.ipseweb.traffic.dto.StationArrivalInfoResponse;
+//import com.ipseweb.traffic.dto.station.StationArrivalInfoResponse;
 //import org.springframework.data.jpa.repository.JpaRepository;
 //
 //import java.util.List;

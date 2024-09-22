@@ -1,6 +1,6 @@
 package com.ipseweb.traffic.exception;
 
-import com.ipseweb.traffic.dto.ErrorResponse;
+import com.ipseweb.traffic.dto.error.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 
 public class ResponseEntityFactory<T> {

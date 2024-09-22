@@ -1,12 +1,10 @@
-package com.ipseweb.traffic.controller;
+package com.ipseweb.traffic.controller.subway;
 
-import com.ipseweb.traffic.dto.StationArrivalInfoResponse;
-import com.ipseweb.traffic.dto.StationArrivalRequest;
-import com.ipseweb.traffic.service.SubwayService;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import com.ipseweb.traffic.service.subway.SubwayService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/subway")
