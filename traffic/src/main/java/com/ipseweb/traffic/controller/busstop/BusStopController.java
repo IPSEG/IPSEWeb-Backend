@@ -2,7 +2,7 @@ package com.ipseweb.traffic.controller.busstop;
 
 import com.ipseweb.traffic.domain.BusStop;
 import com.ipseweb.traffic.dto.busstop.OpenApiBusStopResponse;
-import com.ipseweb.traffic.dto.error.ErrorResponse;
+import com.ipseweb.traffic.dto.error.Response;
 import com.ipseweb.traffic.exception.ResponseEntityFactory;
 import com.ipseweb.traffic.service.busstop.BusStopService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class BusStopController {
      * @return
      */
     @GetMapping("/api/v1/busstops")
-    public ResponseEntity<ErrorResponse<List<BusStop>>> busStopsV1() {
+    public ResponseEntity<Response<List<BusStop>>> busStopsV1() {
         List<BusStop> busStopsV1 = busStopService.findBusStopsV1();
         return ResponseEntityFactory.success(busStopsV1);
     }
@@ -35,7 +35,7 @@ public class BusStopController {
      * @return
      */
     @GetMapping("/api/v2/busstops")
-    public ResponseEntity<ErrorResponse<List<OpenApiBusStopResponse>>> busStopsV2() {
+    public ResponseEntity<Response<List<OpenApiBusStopResponse>>> busStopsV2() {
         List<OpenApiBusStopResponse> busStopsV2 = busStopService.findBusStopsV2();
         return ResponseEntityFactory.success(busStopsV2);
     }

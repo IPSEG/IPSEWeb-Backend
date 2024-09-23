@@ -22,7 +22,7 @@ import java.util.Objects;
 @Builder
 @RequiredArgsConstructor
 @Slf4j
-public class ErrorResponse<T> {
+public class Response<T> {
 
     private final Integer code;
 
@@ -37,15 +37,15 @@ public class ErrorResponse<T> {
     private T data;
 
 
-    public static <T> ErrorResponse<T> success(T data) {
-        return new ErrorResponse<>(SuccessCode.SUCCESS.getHttpStatus().value(),
+    public static <T> Response<T> success(T data) {
+        return new Response<>(SuccessCode.SUCCESS.getHttpStatus().value(),
                 SuccessCode.SUCCESS.getHttpStatus(),
                 SuccessCode.SUCCESS.getMessage(),
                 null,
                 data);
     }
 
-    public ErrorResponse(Integer code, HttpStatus status, String message, List<ValidationError> errors, T data) {
+    public Response(Integer code, HttpStatus status, String message, List<ValidationError> errors, T data) {
         this.code = code;
         this.status = status;
         this.message = message;
