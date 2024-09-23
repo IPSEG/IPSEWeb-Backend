@@ -1,9 +1,9 @@
 package com.ipseweb.traffic.exhandler;
 
 
-import com.ipseweb.traffic.dto.CommonErrorCode;
-import com.ipseweb.traffic.dto.ErrorResponse;
-import com.ipseweb.traffic.dto.ErrorResponse.ValidationError;
+import com.ipseweb.traffic.dto.error.CommonErrorCode;
+import com.ipseweb.traffic.dto.error.Response;
+import com.ipseweb.traffic.dto.error.Response.ValidationError;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -33,9 +33,9 @@ public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHand
                 .map(c -> ValidationError.of(messageSource, c)).filter(Objects::nonNull).collect(Collectors.toList());
 
         CommonErrorCode errorCode = CommonErrorCode.INVALID_PARAMETER;
-        ErrorResponse errorResponse = new ErrorResponse(errorCode.getHttpStatus().value(), errorCode.getHttpStatus(), errorCode.getMessage(), errors);
+        Response response = new Response(errorCode.getHttpStatus().value(), errorCode.getHttpStatus(), errorCode.getMessage(), errors);
 
-        return handleExceptionInternal(ex, errorResponse, headers, status, request);
+        return handleExceptionInternal(ex, response, headers, status, request);
     }
 
 

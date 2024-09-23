@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.service;
+package com.ipseweb.traffic.service.subway;
 
 import com.ipseweb.traffic.util.WebClientUtil;
 import org.springframework.beans.factory.annotation.Value;

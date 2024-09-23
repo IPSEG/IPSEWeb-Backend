@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Transactional
 class BusStopServiceTest {
@@ -24,7 +22,7 @@ class BusStopServiceTest {
 
     @Test
     void findBusStops() {
-        List<BusStop> busStops = busStopService.findBusStops();
+        List<BusStop> busStops = busStopService.findBusStopsV1();
         Assertions.assertThat(busStops.size()).isGreaterThan(0);
     }
 }
