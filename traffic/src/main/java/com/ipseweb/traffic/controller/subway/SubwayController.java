@@ -1,6 +1,9 @@
 package com.ipseweb.traffic.controller.subway;
 
+import com.ipseweb.traffic.dto.error.Response;
+import com.ipseweb.traffic.dto.station.OpenApiStationArrivalResponse;
 import com.ipseweb.traffic.service.subway.SubwayService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +20,8 @@ public class SubwayController {
     }
 
     @GetMapping(value = "/arrivalInfo/{stationName}")
-    public void getStationArrivalInfo(@PathVariable String stationName) {
-        subwayService.getStationArrivalInfo(stationName);
+    public ResponseEntity<Response<OpenApiStationArrivalResponse>> getStationArrivalInfo(@PathVariable String stationName) {
+        return subwayService.getStationArrivalInfo(stationName);
     }
 
 }

@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class StationArrivalInfoResponse {
+public class StationArrivalResponse {
     private String stationLineId;
     private String stationLineName;
     private String stationId;
