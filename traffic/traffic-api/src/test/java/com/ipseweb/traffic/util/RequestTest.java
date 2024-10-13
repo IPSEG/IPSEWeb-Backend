@@ -1,6 +1,7 @@
 package com.ipseweb.traffic.util;
 
 import com.ipseweb.traffic.dto.busstop.OpenApiBusStopResponse;
+import com.ipseweb.util.Request;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

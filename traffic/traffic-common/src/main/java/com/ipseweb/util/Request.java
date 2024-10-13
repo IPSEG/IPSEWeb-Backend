@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.util;
+package com.ipseweb.util;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;

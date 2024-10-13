@@ -4,7 +4,7 @@ package com.ipseweb.traffic.service.busstop;
 import com.ipseweb.traffic.domain.BusStop;
 import com.ipseweb.traffic.dto.busstop.OpenApiBusStopResponse;
 import com.ipseweb.traffic.repository.busstop.BusStopRepository;
-import com.ipseweb.traffic.util.Request;
+import com.ipseweb.util.Request;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

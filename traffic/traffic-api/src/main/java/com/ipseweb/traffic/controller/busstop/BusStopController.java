@@ -2,11 +2,10 @@ package com.ipseweb.traffic.controller.busstop;
 
 import com.ipseweb.traffic.domain.BusStop;
 import com.ipseweb.traffic.dto.busstop.OpenApiBusStopResponse;
-import com.ipseweb.traffic.dto.error.OpenApiErrorCode;
-import com.ipseweb.traffic.dto.error.Response;
-import com.ipseweb.traffic.dto.error.SuccessCode;
-import com.ipseweb.traffic.exception.ResponseEntityFactory;
-import com.ipseweb.traffic.exception.TrafficException;
+import com.ipseweb.error.OpenApiErrorCode;
+import com.ipseweb.error.Response;
+import com.ipseweb.exception.ResponseEntityFactory;
+import com.ipseweb.exception.TrafficException;
 import com.ipseweb.traffic.service.busstop.BusStopService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.dto.error;
+package com.ipseweb.error;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

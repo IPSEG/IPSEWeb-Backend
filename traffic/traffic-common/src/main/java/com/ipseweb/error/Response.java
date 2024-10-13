@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.dto.error;
+package com.ipseweb.error;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;

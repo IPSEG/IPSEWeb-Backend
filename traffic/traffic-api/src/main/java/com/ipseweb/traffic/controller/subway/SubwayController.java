@@ -1,6 +1,6 @@
 package com.ipseweb.traffic.controller.subway;
 
-import com.ipseweb.traffic.dto.error.Response;
+import com.ipseweb.error.Response;
 import com.ipseweb.traffic.dto.station.OpenApiStationArrivalResponse;
 import com.ipseweb.traffic.service.subway.SubwayService;
 import org.springframework.http.ResponseEntity;
