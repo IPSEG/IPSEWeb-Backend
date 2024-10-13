@@ -1,9 +1,9 @@
 package com.ipseweb.traffic.service.subway;
 
-import com.ipseweb.traffic.dto.error.Response;
+import com.ipseweb.error.Response;
 import com.ipseweb.traffic.dto.station.OpenApiStationArrivalResponse;
-import com.ipseweb.traffic.exception.ResponseEntityFactory;
-import com.ipseweb.traffic.util.Request;
+import com.ipseweb.exception.ResponseEntityFactory;
+import com.ipseweb.util.Request;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

@@ -1,9 +1,9 @@
 package com.ipseweb.traffic.exhandler;
 
 
-import com.ipseweb.traffic.dto.error.CommonErrorCode;
-import com.ipseweb.traffic.dto.error.Response;
-import com.ipseweb.traffic.dto.error.Response.ValidationError;
+import com.ipseweb.error.CommonErrorCode;
+import com.ipseweb.error.Response;
+import com.ipseweb.error.Response.ValidationError;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
