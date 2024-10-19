@@ -49,7 +49,10 @@ public class SchedulerService {
     }
 
     private void registerJobTrigger() {
-        jobTrigger.put("BusStopOpenApiCronJob", "0 0 3 * * ?");
+
+//        jobTrigger.put("BusStopOpenApiCronJob", "0 0 3 * * ?");
+//        TODO : 테스트용 매분 실행.
+        jobTrigger.put("BusStopOpenApiCronJob", "0 * * * * ?");
     }
     private void registerJob() {
         TaskExecutorJobLauncher jobLauncher1 = (TaskExecutorJobLauncher) jobLauncher;
