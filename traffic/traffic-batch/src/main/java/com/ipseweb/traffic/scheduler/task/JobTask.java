@@ -1,9 +1,7 @@
-package com.ipseweb.scheduler.task;
+package com.ipseweb.traffic.scheduler.task;
 
-import com.ipseweb.scheduler.trigger.TriggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.scheduling.Trigger;
 
 public abstract class JobTask implements Runnable {
 
@@ -15,6 +13,12 @@ public abstract class JobTask implements Runnable {
 
     public abstract boolean supports(String jobName);
 
+    public void setJob(Job job) {
+        this.job = job;
+    }
 
+    public void setJobLauncher(JobLauncher jobLauncher) {
+        this.jobLauncher = jobLauncher;
+    }
 
 }

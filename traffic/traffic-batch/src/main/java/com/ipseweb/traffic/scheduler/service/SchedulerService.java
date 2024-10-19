@@ -1,9 +1,9 @@
-package com.ipseweb.scheduler.service;
+package com.ipseweb.traffic.scheduler.service;
 
-import com.ipseweb.scheduler.task.JobTask;
-import com.ipseweb.scheduler.task.JobTaskFactory;
-import com.ipseweb.scheduler.trigger.JobTriggerFactory;
-import com.ipseweb.scheduler.trigger.TriggerFactory;
+import com.ipseweb.traffic.scheduler.task.JobTask;
+import com.ipseweb.traffic.scheduler.task.JobTaskFactory;
+import com.ipseweb.traffic.scheduler.trigger.JobTriggerFactory;
+import com.ipseweb.traffic.scheduler.trigger.TriggerFactory;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -55,15 +55,20 @@ public class SchedulerService {
         TaskExecutorJobLauncher jobLauncher1 = (TaskExecutorJobLauncher) jobLauncher;
         jobLauncher1.setTaskExecutor(taskExecutor);
 
-
         for (Job job : jobs) {
 
             JobTask jobTask
                     = jobTaskFactory.find(job.getName());
 
+            jobTask.setJob(job);
+            jobTask.setJobLauncher(jobLauncher1);
+
             TriggerFactory triggerFactory = jobTriggerFactory.find(jobTask.getJobType());
+
+
             String args
                     = jobTrigger.get(job.getName());
+
             Trigger trigger = triggerFactory.createTrigger(args);
 
             taskScheduler.schedule(jobTask, trigger);

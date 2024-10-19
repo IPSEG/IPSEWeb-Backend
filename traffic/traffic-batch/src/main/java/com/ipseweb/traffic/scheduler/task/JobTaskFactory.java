@@ -1,4 +1,4 @@
-package com.ipseweb.scheduler.task;
+package com.ipseweb.traffic.scheduler.task;
 
 
 import lombok.RequiredArgsConstructor;

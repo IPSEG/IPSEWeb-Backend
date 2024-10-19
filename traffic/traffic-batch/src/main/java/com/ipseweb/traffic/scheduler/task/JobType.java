@@ -1,4 +1,4 @@
-package com.ipseweb.scheduler.task;
+package com.ipseweb.traffic.scheduler.task;
 
 public enum JobType {
     CRON_JOB,
