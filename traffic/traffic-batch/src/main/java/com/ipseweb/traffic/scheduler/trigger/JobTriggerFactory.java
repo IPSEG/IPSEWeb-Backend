@@ -1,9 +1,7 @@
-package com.ipseweb.scheduler.trigger;
+package com.ipseweb.traffic.scheduler.trigger;
 
-import com.ipseweb.scheduler.task.JobTask;
-import com.ipseweb.scheduler.task.JobType;
+import com.ipseweb.traffic.scheduler.task.JobType;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.Trigger;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

@@ -1,8 +1,5 @@
-package com.ipseweb.scheduler.task;
+package com.ipseweb.traffic.scheduler.task;
 
-import com.ipseweb.scheduler.trigger.CronTriggerFactory;
-import com.ipseweb.scheduler.trigger.TriggerFactory;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
