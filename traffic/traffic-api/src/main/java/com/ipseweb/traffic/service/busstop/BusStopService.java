@@ -2,16 +2,15 @@ package com.ipseweb.traffic.service.busstop;
 
 
 import com.ipseweb.traffic.domain.BusStop;
-import com.ipseweb.traffic.dto.busstop.OpenApiBusStopResponse;
+import com.ipseweb.traffic.dto.busstop.BusStopDto.BusStopResponse;
 import com.ipseweb.traffic.repository.busstop.BusStopRepository;
-import com.ipseweb.util.Request;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,25 +19,42 @@ public class BusStopService {
 
     private final BusStopRepository busStopRepository;
 
-    @Value("${spring.openapi.busStop.apiKey}")
-    private String apiKey;
+    /**
+     * 모든 버스 정류장 조화
+     * @return
+     */
+    public List<BusStopResponse> findBusStops() {
 
-    @Value("${spring.openapi.busStop.url.busStopInfo}")
-    private String busStopInfoUrl;
+        List<BusStop> busStopList = busStopRepository.findAll();
 
+        return busStopList.stream().map(busStop -> new BusStopResponse(
+                busStop.getBusStopId(),
+                busStop.getBusStopName(),
+                busStop.getCity(),
+                busStop.getDetailCity())).collect(Collectors.toList());
 
-
-    public List<BusStop> findBusStopsV1() {
-        return busStopRepository.findAll();
     }
 
-    public List<OpenApiBusStopResponse> findBusStopsV2() {
-        String url = String.format(busStopInfoUrl, 1, 10, apiKey);
-        OpenApiBusStopResponse openApiBusStopData = Request.requestGet(url, OpenApiBusStopResponse.class);
+    /**
+     * 버스 정류장 이름으로 버스 정류장 조회
+     */
+    public BusStopResponse findBusStopByName(String busStopName) {
+        Optional<BusStop> busStop = busStopRepository.findByBusStopName(busStopName);
 
-        List<OpenApiBusStopResponse> list = new ArrayList<>();
-        list.add(openApiBusStopData);
-
-        return list;
+        return new BusStopResponse(
+                busStop.get().getBusStopId(),
+                busStop.get().getBusStopName(),
+                busStop.get().getCity(),
+                busStop.get().getDetailCity()
+        );
     }
+
+
+
+
+
+
+
+
+
 }

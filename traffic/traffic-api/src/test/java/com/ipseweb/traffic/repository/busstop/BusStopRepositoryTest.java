@@ -9,10 +9,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+
 
 @SpringBootTest
 @Transactional
-class BusStopJpaRepositoryTest {
+class BusStopRepositoryTest {
 
     @Autowired
     EntityManager em;
@@ -20,20 +22,21 @@ class BusStopJpaRepositoryTest {
     @Autowired
     BusStopRepository busStopRepository;
 
-    @Test
-    void findOne() {
-        BusStop busStop = busStopRepository.findOne("ADB354000076");
 
-        Assertions.assertThat(busStop).isNotNull();
-        Assertions.assertThat(busStop.getBusStopName()).isEqualTo("신덕1리");
+    @Test
+    void findById() {
+        Optional<BusStop> busStop = busStopRepository.findById("ADB354000076");
+
+        Assertions.assertThat(busStop.get()).isNotNull();
+        Assertions.assertThat(busStop.get().getBusStopName()).isEqualTo("신덕1리");
     }
 
     @Test
-    void findByName() {
-        List<BusStop> busStop = busStopRepository.findByName("신덕1리");
+    void findByBusStopName() {
+        Optional<BusStop> busStop = busStopRepository.findByBusStopName("신덕1리");
 
-        Assertions.assertThat(busStop).isNotNull();
-        Assertions.assertThat(busStop.get(0).getBusStopId()).isEqualTo("ADB354000076");
+        Assertions.assertThat(busStop.get()).isNotNull();
+        Assertions.assertThat(busStop.get().getBusStopId()).isEqualTo("ADB354000076");
     }
 
     @Test
@@ -42,4 +45,7 @@ class BusStopJpaRepositoryTest {
         Assertions.assertThat(all.size()).isEqualTo(10);
 
     }
+
+
+
 }

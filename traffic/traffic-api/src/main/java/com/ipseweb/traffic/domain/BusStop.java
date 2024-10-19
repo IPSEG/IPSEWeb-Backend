@@ -1,11 +1,14 @@
 package com.ipseweb.traffic.domain;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -19,7 +22,7 @@ public class BusStop {
 
     private String busStopName;
 
-    private LocalDateTime informationCollectDate;
+    private LocalDate informationCollectDate;
 
     private String city;
 
