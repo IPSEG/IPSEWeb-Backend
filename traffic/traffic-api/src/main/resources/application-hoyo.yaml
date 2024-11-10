@@ -9,14 +9,14 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
 
     properties:
       hibernate:
         format_sql: true
         show_sql: true
 
-    defer-datasource-initialization: true
+    defer-datasource-initialization: false
 
   openapi:
     subway:
@@ -29,8 +29,14 @@ spring:
       url:
         busStopInfo: https://api.odcloud.kr/api/15067528/v1/uddi:eb02ec03-6edd-4cb0-88b8-eda22ca55e80?page=%d&perPage=%d&serviceKey=%s
 
+    busArrival:
+      apiKey: ENC(AUw9mJhN8RLlXXe2dO6ZL8m2Tynqa0neV99nYpxZgDbo2wUjrKCzKp4WbdiPIg3GVk/6z0oar39YYR5b3HFyOAZ7v9p65Wrssj2rau0cqGjIJnCj9rDMCLRDdtHI491rkmQ9B4Fw8qg=)
+      url:
+        busArrivalInfo: http://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=%s&pageNo=%d&numOfRows=%d&_type=json&cityCode=%s&nodeId=%s
+
+
   sql:
     init:
-      mode: always
+      mode: never
 
 

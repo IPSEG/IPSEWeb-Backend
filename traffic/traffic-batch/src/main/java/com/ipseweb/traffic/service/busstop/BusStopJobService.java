@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.service;
+package com.ipseweb.traffic.service.busstop;
 
 
 import com.ipseweb.traffic.domain.BusStop;
