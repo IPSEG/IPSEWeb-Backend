@@ -1,11 +1,7 @@
 package com.ipseweb.traffic.controller.busstop;
 
-import com.ipseweb.traffic.domain.BusStop;
-import com.ipseweb.error.OpenApiErrorCode;
 import com.ipseweb.error.Response;
 import com.ipseweb.exception.ResponseEntityFactory;
-import com.ipseweb.exception.TrafficException;
-import com.ipseweb.traffic.dto.busstop.BusStopDto;
 import com.ipseweb.traffic.service.busstop.BusStopService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,11 +13,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.ipseweb.traffic.dto.busstop.BusStopDto.*;
+import static com.ipseweb.traffic.dto.busstop.BusStopDto.BusStopResponse;
 
 @Tag(name = "BusStop", description = "BusStop API")
 @RestController
@@ -59,10 +56,15 @@ public class BusStopController {
                                     schema = @Schema(implementation = BusStopResponse.class)
                             ))
             })
-    @GetMapping("/api/v1/busstop/{busStopName}")
-    public ResponseEntity<Response<BusStopResponse>> busStopV1(@PathVariable String busStopName) {
-        BusStopResponse busStopByName = busStopService.findBusStopByName(busStopName);
+    @GetMapping("/api/v1/busstop")
+    public ResponseEntity<Response<BusStopResponse>> busStopV1(
+            @RequestParam("busStopName") String busStopName,
+            @RequestParam("cityCode") String cityCode,
+            @RequestParam("busStopId") String busStopId) {
+        BusStopResponse busStopByName = busStopService.findBusStopByNameAndCityCodeAndBusStopId(busStopName, cityCode, busStopId);
         return ResponseEntityFactory.success(busStopByName);
     }
+
+
 
 }

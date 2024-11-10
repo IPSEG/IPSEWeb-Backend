@@ -9,5 +9,9 @@ import java.util.Optional;
 
 public interface BusStopRepository extends JpaRepository<BusStop, String> {
 
+    Optional<BusStop> findByBusStopNameAndCityCode(String busStopName, String cityCode);
+
+    Optional<BusStop> findByBusStopNameAndCityCodeAndBusStopId(String busStopName, String cityCode, String busStopId);
+
     Optional<BusStop> findByBusStopName(String busStopName);
 }

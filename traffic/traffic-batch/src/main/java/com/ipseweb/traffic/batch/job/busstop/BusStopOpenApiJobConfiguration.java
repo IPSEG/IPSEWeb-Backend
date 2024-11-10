@@ -2,7 +2,7 @@ package com.ipseweb.traffic.batch.job.busstop;
 
 import com.ipseweb.traffic.domain.BusStop;
 import com.ipseweb.traffic.dto.busstop.OpenApiBusStopResponse;
-import com.ipseweb.traffic.service.BusStopJobService;
+import com.ipseweb.traffic.service.busstop.BusStopJobService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;

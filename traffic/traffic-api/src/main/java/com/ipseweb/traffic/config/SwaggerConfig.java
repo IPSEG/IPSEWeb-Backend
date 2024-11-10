@@ -22,16 +22,26 @@ public class SwaggerConfig {
         return GroupedOpenApi
                 .builder()
                 .group("API-버스정류장")
-                .pathsToMatch("/api/busstops/*")
+                .pathsToMatch("/api/v1/busstops*")
                 .build();
     }
+
+    @Bean
+    public GroupedOpenApi busArrivalApi() {
+        return GroupedOpenApi
+                .builder()
+                .group("API-버스도착정보")
+                .pathsToMatch("/api/v1/bus*")
+                .build();
+    }
+
 
     @Bean
     public GroupedOpenApi subWayApi() {
         return GroupedOpenApi
                 .builder()
                 .group("API-지하철")
-                .pathsToMatch("/subway/*")
+                .pathsToMatch("/api/v1/subway*")
                 .build();
     }
 

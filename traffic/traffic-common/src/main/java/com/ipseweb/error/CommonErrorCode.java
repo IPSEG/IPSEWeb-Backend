@@ -13,6 +13,9 @@ public enum CommonErrorCode implements ErrorCode{
     RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND, "Resource not exists"),
 
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error"),
+
+    NO_SEARCH_DATA_ERROR(HttpStatus.BAD_REQUEST, "No search data"),
+
     ;
 
 
