@@ -1,15 +1,15 @@
 spring:
   application:
-    name: traffic-test
+    name: traffic-local
 
   datasource:
-    url: "jdbc:postgresql://127.0.0.1:5432/ipse"
-    username: "postgres"
-    password: "qwe123"
+    url: jdbc:postgresql://127.0.0.1:5432/ipse
+    username: postgres
+    password: qwe123
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
 
     properties:
       hibernate:
@@ -18,10 +18,9 @@ spring:
 
     defer-datasource-initialization: true
 
-
   openapi:
     subway:
-      apiKey: ENC(ZHhyrqpYzuxZ09onTfn+eIboFAcR6JMQZG5l8kPnTGXeli0io2uSgEbXkUgGKQn8)
+      apiKey: test
       url:
         arrivalInfo: http://swopenAPI.seoul.go.kr/api/subway/%s/json/realtimeStationArrival/%s/%s/%s
 
@@ -33,7 +32,7 @@ spring:
     busArrival:
       apiKey: ENC(AUw9mJhN8RLlXXe2dO6ZL8m2Tynqa0neV99nYpxZgDbo2wUjrKCzKp4WbdiPIg3GVk/6z0oar39YYR5b3HFyOAZ7v9p65Wrssj2rau0cqGjIJnCj9rDMCLRDdtHI491rkmQ9B4Fw8qg=)
       url:
-        busArrivalInfo: https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=%s&pageNo=%d&numOfRows=%d&_type=json&cityCode=%s&nodeId=%s
+        busArrivalInfo: http://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=%s&pageNo=%d&numOfRows=%d&_type=json&cityCode=%s&nodeId=%s
 
 
   sql:
