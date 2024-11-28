@@ -22,7 +22,7 @@ public class SwaggerConfig {
         return GroupedOpenApi
                 .builder()
                 .group("API-버스정류장")
-                .pathsToMatch("/api/v1/busstops*")
+                .pathsToMatch("/api/v1/busstop*")
                 .build();
     }
 
