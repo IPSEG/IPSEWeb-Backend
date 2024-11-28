@@ -45,6 +45,15 @@ public class Response<T> {
                 data);
     }
 
+    public static <T> Response<T> error(ErrorCode err) {
+        return new Response<>(
+                err.getHttpStatus().value(),
+                err.getHttpStatus(),
+                err.getMessage(),
+                null,
+                null);
+    }
+
     public Response(Integer code, HttpStatus status, String message, List<ValidationError> errors, T data) {
         this.code = code;
         this.status = status;

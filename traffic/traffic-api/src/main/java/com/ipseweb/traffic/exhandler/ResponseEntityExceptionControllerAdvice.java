@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 @RequiredArgsConstructor
 @Slf4j
-public class GlobalExceptionControllerAdvice extends ResponseEntityExceptionHandler {
+public class ResponseEntityExceptionControllerAdvice extends ResponseEntityExceptionHandler {
     private final MessageSource messageSource;
 
     @Override

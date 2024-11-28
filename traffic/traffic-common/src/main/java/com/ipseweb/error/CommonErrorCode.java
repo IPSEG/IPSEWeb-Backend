@@ -16,6 +16,8 @@ public enum CommonErrorCode implements ErrorCode{
 
     NO_SEARCH_DATA_ERROR(HttpStatus.BAD_REQUEST, "No search data"),
 
+    UNKNOWN_ERROR(HttpStatus.BAD_REQUEST, "Unknown Error")
+
     ;
 
 
