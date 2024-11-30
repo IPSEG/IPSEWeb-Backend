@@ -9,6 +9,6 @@ public class JoinUserRequest {
     private String userId;
     private String userName;
     private String encryptedPassword;
-    private String rsaKey;
+    private String randomString;
     private String userEmail;
 }

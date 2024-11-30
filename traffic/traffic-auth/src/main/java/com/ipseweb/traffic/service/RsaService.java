@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
+import java.util.Base64;
 
 @Service
 public class RsaService {
@@ -14,9 +15,11 @@ public class RsaService {
     private KeyFactory keyFactory;
     private RedisTemplate redisTemplate;
 
-    public RsaService() {
+    public RsaService(RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
         try {
             this.keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+            this.keyPairGenerator.initialize(2048); // 키 크기를 2048비트로 설정
             this.keyFactory = KeyFactory.getInstance("RSA");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -31,15 +34,16 @@ public class RsaService {
 
         try {
             RSAPublicKeySpec publicKeySpec = keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
-            String modulus = publicKeySpec.getModulus().toString();
-            String exponent = publicKeySpec.getPublicExponent().toString();
+            String modulus = publicKeySpec.getModulus().toString(16);
+            String exponent = publicKeySpec.getPublicExponent().toString(16);
             String randomString = getRandomString();
 
             rsaResponse.setModulus(modulus);
             rsaResponse.setExponent(exponent);
             rsaResponse.setRandomString(randomString);
 
-            redisTemplate.opsForValue().set(randomString, modulus);
+            // 생성한 privateKey를 redis에 저장
+            redisTemplate.opsForValue().set(randomString, Base64.getEncoder().encodeToString(privateKey.getEncoded()));
         } catch (InvalidKeySpecException e) {
             throw new RuntimeException(e);
         }
