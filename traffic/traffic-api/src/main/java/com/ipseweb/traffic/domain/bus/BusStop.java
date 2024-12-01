@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.domain;
+package com.ipseweb.traffic.domain.bus;
 
 
 import jakarta.persistence.Column;

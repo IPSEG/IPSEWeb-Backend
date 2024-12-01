@@ -2,19 +2,16 @@ package com.ipseweb.traffic.repository.busstop;
 
 import com.ipseweb.error.CommonErrorCode;
 import com.ipseweb.exception.TrafficException;
-import com.ipseweb.traffic.domain.BusStop;
-import com.ipseweb.traffic.domain.QBusStop;
+import com.ipseweb.traffic.domain.bus.BusStop;
 import com.ipseweb.traffic.dto.busstop.condition.BusStopSearchCondition;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
-import org.springframework.util.StringUtils;
 
 import java.util.Optional;
 
-import static com.ipseweb.traffic.domain.QBusStop.*;
-import static org.springframework.util.StringUtils.*;
+import static com.ipseweb.traffic.domain.bus.QBusStop.busStop;
+import static org.springframework.util.StringUtils.hasLength;
 
 public class BusStopRepositoryQueryDslCustomImpl implements BusStopRepositoryQueryDslCustom{
 
