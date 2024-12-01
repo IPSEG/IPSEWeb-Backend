@@ -2,15 +2,16 @@ package com.ipseweb.traffic.domain.card;
 
 import com.ipseweb.traffic.domain.base.BaseEntity;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
-@RequiredArgsConstructor
 @Getter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
 @Table(name = "tb_card")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Card extends BaseEntity {
 
     @Id
@@ -23,4 +24,21 @@ public abstract class Card extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "card_group_id")
     private CardGroup cardGroup;
+
+    public Card(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 연관 관계 편의 메서드
+     */
+    public void setCardGroup(CardGroup cardGroup) {
+
+        if (this.cardGroup != null) {
+            this.cardGroup.getCardList().remove(this);
+        }
+
+        this.cardGroup = cardGroup;
+        cardGroup.getCardList().add(this);
+    }
 }

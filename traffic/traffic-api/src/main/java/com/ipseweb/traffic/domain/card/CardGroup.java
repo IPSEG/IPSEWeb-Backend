@@ -3,15 +3,17 @@ package com.ipseweb.traffic.domain.card;
 
 import com.ipseweb.traffic.domain.base.BaseEntity;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@RequiredArgsConstructor
 @Getter
 @Table(name = "tb_card_group")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CardGroup extends BaseEntity {
 
     @Id
@@ -22,5 +24,9 @@ public class CardGroup extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "cardGroup", orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<Card> cardList;
+    private List<Card> cardList = new ArrayList<>();
+
+    public CardGroup(String name) {
+        this.name = name;
+    }
 }
