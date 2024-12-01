@@ -1,6 +1,7 @@
 package com.ipseweb.traffic.domain.card;
 
 import com.ipseweb.traffic.domain.base.BaseEntity;
+import com.ipseweb.traffic.domain.cardgroup.CardGroup;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
