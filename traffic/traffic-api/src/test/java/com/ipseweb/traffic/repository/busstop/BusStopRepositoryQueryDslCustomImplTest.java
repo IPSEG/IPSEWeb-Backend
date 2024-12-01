@@ -1,7 +1,7 @@
 package com.ipseweb.traffic.repository.busstop;
 
 import com.ipseweb.exception.TrafficException;
-import com.ipseweb.traffic.domain.BusStop;
+import com.ipseweb.traffic.domain.bus.BusStop;
 import com.ipseweb.traffic.dto.busstop.condition.BusStopSearchCondition;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

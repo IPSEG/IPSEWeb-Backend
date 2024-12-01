@@ -1,6 +1,6 @@
 package com.ipseweb.traffic.repository.busstop;
 
-import com.ipseweb.traffic.domain.BusStop;
+import com.ipseweb.traffic.domain.bus.BusStop;
 import com.ipseweb.traffic.dto.busstop.condition.BusStopSearchCondition;
 
 import java.util.Optional;

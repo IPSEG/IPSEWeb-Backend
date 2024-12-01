@@ -1,7 +1,5 @@
 package com.ipseweb.traffic.service.busstop;
 
-import com.ipseweb.traffic.domain.BusStop;
-import com.ipseweb.traffic.dto.busstop.BusStopDto;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
