@@ -1,7 +1,7 @@
 package com.ipseweb.traffic.service.subway;
 
 import com.ipseweb.error.Response;
-import com.ipseweb.traffic.dto.station.OpenApiStationArrivalResponse;
+import com.ipseweb.traffic.dto.subway.OpenApiStationArrivalResponse;
 import com.ipseweb.exception.ResponseEntityFactory;
 import com.ipseweb.util.Request;
 import org.springframework.beans.factory.annotation.Value;

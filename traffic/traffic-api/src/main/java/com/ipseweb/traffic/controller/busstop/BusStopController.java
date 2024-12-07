@@ -2,6 +2,7 @@ package com.ipseweb.traffic.controller.busstop;
 
 import com.ipseweb.error.Response;
 import com.ipseweb.exception.ResponseEntityFactory;
+import com.ipseweb.traffic.resource.busstop.BusStopResource;
 import com.ipseweb.traffic.service.busstop.BusStopService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -11,10 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,29 +22,10 @@ import static com.ipseweb.traffic.dto.busstop.BusStopDto.BusStopResponse;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@RequestMapping(BusStopResource.BUS_STOP)
 public class BusStopController {
 
     private final BusStopService busStopService;
-
-
-    /**
-     * v1. db에서 버스 정류장 정보 조회
-     *
-     * @return
-     */
-    @Operation(summary = "모든 버스정류장 목록 조회", description = "v1, 버스 정류장 목록을 조회합니다.",
-        responses = {
-            @ApiResponse(description = "JPA 버스 정류장 조회",
-            content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = BusStopResponse.class)
-            ))
-        })
-    @GetMapping("/api/v1/busstops")
-    public ResponseEntity<Response<List<BusStopResponse>>> busStopsV1() {
-        List<BusStopResponse> busStops = busStopService.findBusStops();
-        return ResponseEntityFactory.success(busStops);
-    }
 
     @Operation(summary = "버스정류장 이름으로 조회", description = "v1, 버스 정류장 이름으로 버스 정류장을 조회합니다.",
             responses = {
@@ -56,7 +35,7 @@ public class BusStopController {
                                     schema = @Schema(implementation = BusStopResponse.class)
                             ))
             })
-    @GetMapping("/api/v1/busstop")
+    @GetMapping("/v1")
     public ResponseEntity<Response<BusStopResponse>> busStopV1(
             @RequestParam("busStopName") String busStopName,
             @RequestParam("cityCode") String cityCode,

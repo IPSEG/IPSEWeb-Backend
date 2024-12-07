@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.dto.station;
+package com.ipseweb.traffic.dto.subway;
 
 public class OpenApiStationArrivalData {
     public String subwayId; // 지하철호선ID
