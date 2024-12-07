@@ -22,7 +22,7 @@ public class SwaggerConfig {
         return GroupedOpenApi
                 .builder()
                 .group("API-버스정류장")
-                .pathsToMatch("/api/v1/busstop*")
+                .pathsToMatch("/api/traffic/bus-stop/*")
                 .build();
     }
 
@@ -31,7 +31,7 @@ public class SwaggerConfig {
         return GroupedOpenApi
                 .builder()
                 .group("API-버스도착정보")
-                .pathsToMatch("/api/v1/bus*")
+                .pathsToMatch("/api/traffic/bus-arrival/*")
                 .build();
     }
 
@@ -41,8 +41,18 @@ public class SwaggerConfig {
         return GroupedOpenApi
                 .builder()
                 .group("API-지하철")
-                .pathsToMatch("/api/v1/subway*")
+                .pathsToMatch("/api/traffic/subway-arrival/*")
                 .build();
     }
+
+    @Bean
+    public GroupedOpenApi cardGroupApi() {
+        return GroupedOpenApi
+                .builder()
+                .group("API-카드그룹")
+                .pathsToMatch("/api/traffic/card-group/*")
+                .build();
+    }
+
 
 }

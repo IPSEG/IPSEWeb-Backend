@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.dto.station;
+package com.ipseweb.traffic.dto.subway;
 
 import lombok.Getter;
 import lombok.Setter;

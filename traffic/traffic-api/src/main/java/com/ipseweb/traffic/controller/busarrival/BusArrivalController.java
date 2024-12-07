@@ -4,6 +4,7 @@ import com.ipseweb.error.Response;
 import com.ipseweb.traffic.dto.busarrival.BusArrivalDto;
 import com.ipseweb.traffic.dto.busarrival.OpenApiBusArrivalResponse;
 import com.ipseweb.traffic.dto.busstop.BusStopDto;
+import com.ipseweb.traffic.resource.busarrival.BusArrivalResource;
 import com.ipseweb.traffic.service.busarrival.BusArrivalService;
 import com.ipseweb.traffic.service.busstop.BusStopService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,10 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +23,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@RequestMapping(BusArrivalResource.BUS_ARRIVAL)
 public class BusArrivalController {
 
     private final BusStopService busStopService;
@@ -38,7 +37,7 @@ public class BusArrivalController {
                                     schema = @Schema(implementation = BusArrivalDto.BusArrivalInfoResponse.class)
                             ))
             })
-    @PostMapping("/api/v1/bus")
+    @PostMapping("/v1")
     public ResponseEntity<Response<List<BusArrivalDto.BusArrivalInfoResponse>>> busArrivalInfoV1(
             @RequestBody BusArrivalDto.BusArrivalInfoRequest busArrivalInfoRequest) {
 
