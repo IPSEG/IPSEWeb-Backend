@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface CardGroupRepositoryQueryDslCustom {
 
-    List<Optional<CardGroup>> searchCardGroup(CardGroupSearchCondition condition);
+    List<CardGroup> searchCardGroup(CardGroupSearchCondition condition);
 
 }

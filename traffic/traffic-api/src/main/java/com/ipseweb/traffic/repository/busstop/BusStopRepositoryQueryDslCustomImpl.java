@@ -31,7 +31,9 @@ public class BusStopRepositoryQueryDslCustomImpl implements BusStopRepositoryQue
                         busStopNameEq(condition.getBusStopName())
                 )
                 .fetch()
-                .stream().findFirst().orElseThrow(
+                .stream()
+                .findFirst()
+                .orElseThrow(
                         () -> new TrafficException(CommonErrorCode.NO_SEARCH_DATA_ERROR)
                 ));
     }

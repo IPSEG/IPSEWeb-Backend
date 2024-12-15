@@ -21,19 +21,26 @@ public class CardGroupService {
 
     public List<CardGroupDto.CardGroupResponse> getCardGroupList(CardGroupSearchCondition condition) {
 
-        return cardGroupRepository.searchCardGroup(condition).stream().map(
-                cg -> new CardGroupDto.CardGroupResponse(
-                        cg.get().getId(),
-                        cg.get().getName(),
-
-                        new CardDto.MultipleCardIdAndNameResponse(
-                                cg.get().getCardList().stream().map(c -> new CardDto.CardIdAndNameResponse(
-                                c.getId(),
-                                c.getName())
-                                ).collect(Collectors.toList())
+        return cardGroupRepository.searchCardGroup(condition)
+                .stream()
+                .filter( cg -> cg != null)
+                .map(
+                        cg -> new CardGroupDto.CardGroupResponse(
+                                cg.getId(),
+                                cg.getName(),
+                                new CardDto.MultipleCardIdAndNameResponse(
+                                        cg.getCardList()
+                                                .stream()
+                                                .map( c ->
+                                                        new CardDto.CardIdAndNameResponse(
+                                                                c.getId(),
+                                                                c.getName())
+                                                ).collect(Collectors.toList())
+                                )
                         )
                 )
-        ).collect(Collectors.toList());
+                .collect(Collectors.toList());
+
     }
 
 

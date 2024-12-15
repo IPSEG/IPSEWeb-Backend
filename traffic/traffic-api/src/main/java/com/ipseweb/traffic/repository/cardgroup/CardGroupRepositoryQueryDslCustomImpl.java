@@ -24,7 +24,7 @@ public class CardGroupRepositoryQueryDslCustomImpl implements CardGroupRepositor
     }
 
     @Override
-    public List<Optional<CardGroup>> searchCardGroup(CardGroupSearchCondition condition) {
+    public List<CardGroup> searchCardGroup(CardGroupSearchCondition condition) {
 
         return jpaQueryFactory
                 .selectFrom(cardGroup)
@@ -34,7 +34,6 @@ public class CardGroupRepositoryQueryDslCustomImpl implements CardGroupRepositor
                 .join(cardGroup.cardList, card)
                 .fetchJoin()
                 .stream()
-                .map(c -> Optional.of(c))
                 .collect(Collectors.toList());
     }
 
