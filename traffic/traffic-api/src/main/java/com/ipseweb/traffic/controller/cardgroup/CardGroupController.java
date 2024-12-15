@@ -34,7 +34,7 @@ public class CardGroupController {
                     @ApiResponse(description = "JPA 버스 정류장 검색",
                             content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = BusStopDto.BusStopResponse.class)
+                                    schema = @Schema(implementation = CardGroupDto.CardGroupResponse.class)
                             ))
             })
     @RequestBody( content = @Content(

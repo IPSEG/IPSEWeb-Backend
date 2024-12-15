@@ -2,6 +2,8 @@ package com.ipseweb.traffic.domain.card;
 
 import com.ipseweb.traffic.domain.base.BaseEntity;
 import com.ipseweb.traffic.domain.cardgroup.CardGroup;
+import com.ipseweb.traffic.dto.card.CardDto;
+import com.ipseweb.traffic.dto.card.visitor.CardVisitor;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,7 +12,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dtype")
+@DiscriminatorColumn(name = "CardType",
+        discriminatorType = DiscriminatorType.STRING
+)
 @Table(name = "tb_card")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Card extends BaseEntity {
@@ -42,4 +46,9 @@ public abstract class Card extends BaseEntity {
         this.cardGroup = cardGroup;
         cardGroup.getCardList().add(this);
     }
+
+    /**
+     *
+     */
+    public abstract CardDto.CardDetail accept(CardVisitor visitor);
 }

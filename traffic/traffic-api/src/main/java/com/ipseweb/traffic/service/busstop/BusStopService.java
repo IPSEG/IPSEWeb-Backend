@@ -47,6 +47,7 @@ public class BusStopService {
         try {
             Optional<BusStop> busStop = busStopRepository.findByBusStopNameAndCityCodeAndBusStopId(busStopName, cityCode, busStopId);
 
+
             return new BusStopResponse(
                     busStop.get().getBusStopId(),
                     busStop.get().getBusStopName(),

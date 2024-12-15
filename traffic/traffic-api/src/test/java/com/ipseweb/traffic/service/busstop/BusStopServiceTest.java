@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.ipseweb.traffic.dto.busstop.BusStopDto.*;
+import static com.ipseweb.traffic.dto.busstop.BusStopDto.BusStopResponse;
 
 @SpringBootTest
 @Transactional
