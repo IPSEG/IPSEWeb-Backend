@@ -49,6 +49,8 @@ public class CardGroupController {
     ))
     @GetMapping("/v1")
     public List<CardGroupDto.CardGroupResponse> getCardGroupList(@Param("name") String name) {
+//      TODO :  Jackson의 동작: 런타임 객체의 타입을 기준으로 직렬화하기 때문에 실제 클래스의 필드가 자동으로 포함됩니다.
+//      이거 진짜인지 확인해야됨. 그리고 이걸 주제로 velog 작성하자.
         CardGroupSearchCondition condition = new CardGroupSearchCondition(name);
         return cardGroupService.getCardGroupList(condition);
     }

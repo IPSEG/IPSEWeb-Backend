@@ -54,5 +54,14 @@ public class SwaggerConfig {
                 .build();
     }
 
+    @Bean
+    public GroupedOpenApi cardApi() {
+        return GroupedOpenApi
+                .builder()
+                .group("API-카드")
+                .pathsToMatch("/api/traffic/card/*")
+                .build();
+    }
+
 
 }

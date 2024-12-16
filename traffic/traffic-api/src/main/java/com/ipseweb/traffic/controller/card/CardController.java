@@ -2,7 +2,6 @@ package com.ipseweb.traffic.controller.card;
 
 import com.ipseweb.error.Response;
 import com.ipseweb.exception.ResponseEntityFactory;
-import com.ipseweb.traffic.dto.busstop.BusStopDto;
 import com.ipseweb.traffic.dto.card.CardDto;
 import com.ipseweb.traffic.resource.card.CardResource;
 import com.ipseweb.traffic.service.card.CardService;
@@ -14,10 +13,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,7 +26,7 @@ public class CardController {
                     @ApiResponse(description = "JPA 카드 상세 정보 조회",
                             content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = CardDto.CardDetailResponse.class)
+                                    schema = @Schema(implementation = CardDto.CardDetail.class)
                             ))
             })
     @RequestBody( content = @Content(
@@ -46,5 +42,23 @@ public class CardController {
     @GetMapping("/v1")
     public ResponseEntity<Response<CardDto.CardDetail>> getCard(@RequestParam("id") Long id) {
         return ResponseEntityFactory.success(cardService.getCard(id));
+    }
+
+
+    @Operation(summary = "카드 추가", description = "v1, 카드를 추가합니다.",
+        responses = {
+            @ApiResponse(description = "JPA 카드 추가",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = CardDto.Add.class )
+                    )
+            )
+
+        })
+    @PostMapping("/v1/add")
+    public ResponseEntity<Response<Void>> addCard(@RequestBody CardDto.Add add) {
+        cardService.addCard(add);
+        // TODO : EmptyResponse 생성 필요        
+        return ResponseEntityFactory.success(null);
     }
 }

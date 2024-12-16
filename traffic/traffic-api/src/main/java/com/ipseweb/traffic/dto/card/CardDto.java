@@ -1,5 +1,6 @@
 package com.ipseweb.traffic.dto.card;
 
+import com.ipseweb.traffic.resource.card.type.CardType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,18 +9,43 @@ import java.util.List;
 
 public class CardDto {
 
-    public record CardDetailResponse(){
 
-    };
+    public record CardIdAndNameResponse(Long id, String name) {
 
-    public record CardIdAndNameResponse(Long id, String name){
+    }
 
-    };
+    ;
 
-    public record MultipleCardIdAndNameResponse(List<CardIdAndNameResponse> list){
+    public record MultipleCardIdAndNameResponse(List<CardIdAndNameResponse> list) {
 
-    };
+    }
 
+    ;
+
+    /**
+     * TODO : 일단 간단하게 가자.
+     */
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Data
+    public static class Add {
+
+        private String cardName;
+
+        private Long cardGroupId;
+
+        private CardType cardType;
+
+        private String busStopName;
+
+        private String cityCode;
+
+        private String busStopId;
+
+        private String stationName;
+
+    }
 
 
     @NoArgsConstructor
@@ -28,7 +54,6 @@ public class CardDto {
     public static abstract class CardDetail {
         private Long id;
         private String name;
-
     }
 
     @Data
