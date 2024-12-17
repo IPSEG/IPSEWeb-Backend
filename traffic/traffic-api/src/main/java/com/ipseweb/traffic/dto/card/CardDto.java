@@ -1,5 +1,7 @@
 package com.ipseweb.traffic.dto.card;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ipseweb.traffic.resource.card.type.CardType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +9,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
+@NoArgsConstructor
+@Data
 public class CardDto {
 
 
@@ -29,6 +34,7 @@ public class CardDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Data
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class Add {
 
         private String cardName;
@@ -58,6 +64,7 @@ public class CardDto {
 
     @Data
     @NoArgsConstructor
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class BusArrivalCardDetail extends CardDetail {
         public BusArrivalCardDetail(Long id, String cardName, String busStopName, String cityCode, String busStopId) {
             super(id, cardName);
@@ -76,6 +83,7 @@ public class CardDto {
 
     @Data
     @NoArgsConstructor
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class SubwayArrivalCardDetail extends CardDetail {
         private String stationName;
 

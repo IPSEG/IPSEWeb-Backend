@@ -12,10 +12,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 
 
 @Getter
@@ -52,6 +49,16 @@ public class Response<T> {
                 err.getMessage(),
                 null,
                 null);
+    }
+
+    public static Response empty() {
+        return new Response<>(
+                0,
+                HttpStatus.OK,
+                null,
+                null,
+                null
+        );
     }
 
     public Response(Integer code, HttpStatus status, String message, List<ValidationError> errors, T data) {
