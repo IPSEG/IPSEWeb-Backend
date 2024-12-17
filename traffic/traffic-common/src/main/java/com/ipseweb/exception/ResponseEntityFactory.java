@@ -17,4 +17,9 @@ public class ResponseEntityFactory<T> {
 
     }
 
+    public static ResponseEntity<Response> empty() {
+        Response response = Response.empty();
+        return new ResponseEntity<>(response, response.getStatus());
+    }
+
 }

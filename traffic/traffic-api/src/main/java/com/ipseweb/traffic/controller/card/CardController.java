@@ -7,9 +7,7 @@ import com.ipseweb.traffic.resource.card.CardResource;
 import com.ipseweb.traffic.service.card.CardService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,16 +27,6 @@ public class CardController {
                                     schema = @Schema(implementation = CardDto.CardDetail.class)
                             ))
             })
-    @RequestBody( content = @Content(
-            examples = {
-                    @ExampleObject(name = "request", value = """
-                                    {
-                                        "id":"Long"
-                                    }
-                                    """
-                    )
-            }
-    ))
     @GetMapping("/v1")
     public ResponseEntity<Response<CardDto.CardDetail>> getCard(@RequestParam("id") Long id) {
         return ResponseEntityFactory.success(cardService.getCard(id));
@@ -56,9 +44,10 @@ public class CardController {
 
         })
     @PostMapping("/v1/add")
-    public ResponseEntity<Response<Void>> addCard(@RequestBody CardDto.Add add) {
+    public ResponseEntity<Response> addCard(@RequestBody CardDto.Add add) {
         cardService.addCard(add);
-        // TODO : EmptyResponse 생성 필요        
-        return ResponseEntityFactory.success(null);
+        return ResponseEntityFactory.empty();
     }
+
+
 }
