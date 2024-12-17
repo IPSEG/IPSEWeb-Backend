@@ -12,3 +12,6 @@ VALUES
     ('ADB354000084', '오락', '2023-10-16 00:00:00.000000'::timestamp, '안동', '경상북도 안동시', '37040', '540084', '128.91400100', '36.43337200'),
     ('ADB354000085', '유곡', '2023-10-16 00:00:00.000000'::timestamp, '안동', '경상북도 안동시', '37040', '540085', '128.92680300', '36.33090300') ON CONFLICT DO NOTHING;
 
+
+
+INSERT INTO TB_CARD_GROUP(card_group_id, created_date, last_modified_date, name, create_by, last_modified_by) VALUES(1, now(), now(), 'default', 'root', 'root');
