@@ -1,21 +1,23 @@
 package com.ipseweb.traffic.controller.cardgroup;
 
 
-import com.ipseweb.traffic.dto.busstop.BusStopDto;
+import com.ipseweb.error.Response;
+import com.ipseweb.exception.ResponseEntityFactory;
 import com.ipseweb.traffic.dto.cardgroup.CardGroupDto;
 import com.ipseweb.traffic.dto.cardgroup.condition.CardGroupSearchCondition;
 import com.ipseweb.traffic.resource.cardgroup.CardGroupResources;
 import com.ipseweb.traffic.service.cardgroup.CardGroupService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,12 +40,26 @@ public class CardGroupController {
                             ))
             })
     @GetMapping("/v1")
-    public List<CardGroupDto.CardGroupResponse> getCardGroupList(@Param("name") String name) {
-//      TODO :  Jackson의 동작: 런타임 객체의 타입을 기준으로 직렬화하기 때문에 실제 클래스의 필드가 자동으로 포함됩니다.
-//      이거 진짜인지 확인해야됨. 그리고 이걸 주제로 velog 작성하자.
+    public ResponseEntity<Response<List<CardGroupDto.CardGroupResponse>>> getCardGroupList(@Param("name") String name) {
         CardGroupSearchCondition condition = new CardGroupSearchCondition(name);
-        return cardGroupService.getCardGroupList(condition);
+        return ResponseEntityFactory.success(cardGroupService.getCardGroupList(condition));
     }
+
+
+    @Operation(summary = "카드 그룹 생성", description = "v1, 카드 그룹을 생성합니다.",
+            responses = {
+                    @ApiResponse(description = "카드 그룹 추가",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = CardGroupDto.Add.class)
+                            ))
+            })
+    @PostMapping("/v1/add")
+    public ResponseEntity<Response> addCardGroup(@RequestBody CardGroupDto.Add add ) {
+        cardGroupService.addCardGroup(add);
+        return ResponseEntityFactory.empty();
+    }
+
 
 
 

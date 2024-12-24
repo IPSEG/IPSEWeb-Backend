@@ -48,7 +48,7 @@ public abstract class Card extends BaseEntity {
     }
 
     /**
-     *
+     * visitor 위임 함수
      */
     public abstract CardDto.CardDetail accept(CardVisitor visitor);
 }
