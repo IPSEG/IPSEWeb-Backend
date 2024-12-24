@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class CardController {
 
     private final CardService cardService;
+
     @Operation(summary = "카드 ID로 카드 상세 정보 조회", description = "v1, 카드 ID로 카드 상세 정보를 조회합니다.",
             responses = {
                     @ApiResponse(description = "JPA 카드 상세 정보 조회",
@@ -34,15 +35,15 @@ public class CardController {
 
 
     @Operation(summary = "카드 추가", description = "v1, 카드를 추가합니다.",
-        responses = {
-            @ApiResponse(description = "JPA 카드 추가",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = CardDto.Add.class )
+            responses = {
+                    @ApiResponse(description = "JPA 카드 추가",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = CardDto.Add.class)
+                            )
                     )
-            )
 
-        })
+            })
     @PostMapping("/v1/add")
     public ResponseEntity<Response> addCard(@RequestBody CardDto.Add add) {
         cardService.addCard(add);

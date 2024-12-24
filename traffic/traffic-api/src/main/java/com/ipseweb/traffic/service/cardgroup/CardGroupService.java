@@ -1,5 +1,8 @@
 package com.ipseweb.traffic.service.cardgroup;
 
+import com.ipseweb.error.CardGroupErrorCode;
+import com.ipseweb.exception.CardGroupException;
+import com.ipseweb.traffic.domain.cardgroup.CardGroup;
 import com.ipseweb.traffic.dto.card.CardDto;
 import com.ipseweb.traffic.dto.cardgroup.CardGroupDto;
 import com.ipseweb.traffic.dto.cardgroup.condition.CardGroupSearchCondition;
@@ -23,7 +26,7 @@ public class CardGroupService {
 
         return cardGroupRepository.searchCardGroup(condition)
                 .stream()
-                .filter( cg -> cg != null)
+                .filter(cg -> cg != null)
                 .map(
                         cg -> new CardGroupDto.CardGroupResponse(
                                 cg.getId(),
@@ -31,7 +34,7 @@ public class CardGroupService {
                                 new CardDto.MultipleCardIdAndNameResponse(
                                         cg.getCardList()
                                                 .stream()
-                                                .map( c ->
+                                                .map(c ->
                                                         new CardDto.CardIdAndNameResponse(
                                                                 c.getId(),
                                                                 c.getName())
@@ -41,6 +44,17 @@ public class CardGroupService {
                 )
                 .collect(Collectors.toList());
 
+    }
+
+    public void addCardGroup(CardGroupDto.Add add) {
+        cardGroupRepository.findCardGroupByName(add.getCardGroupName()).ifPresent(cardGroup -> {
+            log.error("A card group with the same name exists.");
+            throw new CardGroupException(CardGroupErrorCode.CARD_GROUP_ALREADY_EXIST);
+        });
+
+        CardGroup cardGroup = new CardGroup(add.getCardGroupName());
+
+        cardGroupRepository.save(cardGroup);
     }
 
 
