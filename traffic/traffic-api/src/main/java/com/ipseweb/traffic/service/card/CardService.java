@@ -4,15 +4,13 @@ import com.ipseweb.error.CardErrorCode;
 import com.ipseweb.error.CardGroupErrorCode;
 import com.ipseweb.exception.CardException;
 import com.ipseweb.exception.CardGroupException;
-import com.ipseweb.traffic.domain.card.BusArrivalCard;
 import com.ipseweb.traffic.domain.card.Card;
-import com.ipseweb.traffic.domain.card.SubwayArrivalCard;
 import com.ipseweb.traffic.domain.cardgroup.CardGroup;
 import com.ipseweb.traffic.dto.card.CardDto;
 import com.ipseweb.traffic.dto.card.visitor.CardToCardDetailDtoVisitor;
 import com.ipseweb.traffic.repository.card.CardRepository;
 import com.ipseweb.traffic.repository.cardgroup.CardGroupRepository;
-import com.ipseweb.traffic.resource.card.type.CardType;
+import com.ipseweb.traffic.service.card.factory.CardFactoryProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -41,23 +39,7 @@ public class CardService {
             throw new CardGroupException(CardGroupErrorCode.CARD_GROUP_IS_NOT_EXIST);
         });
 
-        // TODO : Factory 패턴 및 다른 방법 고안 필요.. 코드가 더럽다.
-        Card card = null;
-
-        if (add.getCardType().equals(CardType.BUS)) {
-            card = new BusArrivalCard(
-                    add.getCardName(),
-                    add.getBusStopName(),
-                    add.getCityCode(),
-                    add.getBusStopId()
-            );
-        } else if (add.getCardType().equals(CardType.SUBWAY)) {
-            card = new SubwayArrivalCard(
-                    add.getStationName()
-            );
-        } else if (add.getCardType().equals(CardType.TRAFFIC)) {
-            // TODO
-        }
+        Card card = CardFactoryProvider.getFactory(add.getCardType()).createCard(add);
 
         card.setCardGroup(cardGroup);
 
