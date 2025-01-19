@@ -3,11 +3,13 @@ package com.ipseweb.traffic.service;
 import com.ipseweb.traffic.dto.CustomUserDetails;
 import com.ipseweb.traffic.dto.JoinUserRequest;
 import com.ipseweb.traffic.dto.LoginRequest;
+import com.ipseweb.traffic.dto.LoginResponse;
 import com.ipseweb.traffic.entity.User;
 import com.ipseweb.traffic.repository.UserRepository;
 import com.ipseweb.traffic.util.JwtUtil;
 import com.ipseweb.traffic.util.SecurityUtil;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +21,7 @@ import java.util.regex.Pattern;
 
 @AllArgsConstructor
 @Service
+@Slf4j
 public class UserService {
 
     private final SecurityUtil securityUtil;
@@ -61,7 +64,10 @@ public class UserService {
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
         String accessToken = jwtUtil.generateToken(customUserDetails.getUsername());
 
-        return new ResponseEntity<Object>(accessToken, HttpStatus.OK);
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setAccessToken(accessToken);
+
+        return new ResponseEntity<Object>(loginResponse, HttpStatus.OK);
     }
 
 }
