@@ -1,3 +1,5 @@
 rootProject.name = 'traffic'
-
 include 'traffic-auth'
+include 'traffic-batch'
+include 'traffic-api'
+include 'traffic-common'
