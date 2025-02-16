@@ -12,26 +12,30 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "CardType",
+@DiscriminatorColumn(name = "card_type",
         discriminatorType = DiscriminatorType.STRING
 )
-@Table(name = "tb_card")
+@Table(name = "card_info")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Card extends BaseEntity {
 
     @Id
     @Column(name = "card_id")
     @GeneratedValue
-    private Long id;
+    private Long cardId;
 
-    private String name;
+    @Column(name = "card_name")
+    private String cardName;
+
+    @Column(name = "user_id")
+    private String userId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "card_group_id")
     private CardGroup cardGroup;
 
     public Card(String name) {
-        this.name = name;
+        this.cardName = name;
     }
 
     /**

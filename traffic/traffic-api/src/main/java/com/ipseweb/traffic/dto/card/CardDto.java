@@ -36,21 +36,15 @@ public class CardDto {
     @Data
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class Add {
-
+        private String userId;
         private String cardName;
-
         private Long cardGroupId;
-
         private CardType cardType;
-
-        private String busStopName;
-
-        private String cityCode;
-
         private String busStopId;
-
+        private String busStopName;
+        private String subwayId;
         private String stationName;
-
+        private String cityCode;
     }
 
 

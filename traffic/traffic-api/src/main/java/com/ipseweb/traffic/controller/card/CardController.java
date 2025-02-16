@@ -20,7 +20,7 @@ public class CardController {
 
     private final CardService cardService;
 
-    @Operation(summary = "카드 ID로 카드 상세 정보 조회", description = "v1, 카드 ID로 카드 상세 정보를 조회합니다.",
+    @Operation(summary = "카드 상세 정보 조회", description = "v1, 카드 ID로 카드 상세 정보를 조회합니다.",
             responses = {
                     @ApiResponse(description = "JPA 카드 상세 정보 조회",
                             content = @Content(

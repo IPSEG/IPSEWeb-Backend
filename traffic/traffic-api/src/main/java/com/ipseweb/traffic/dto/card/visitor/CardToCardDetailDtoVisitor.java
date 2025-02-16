@@ -9,8 +9,8 @@ public class CardToCardDetailDtoVisitor implements CardVisitor {
     @Override
     public CardDto.BusArrivalCardDetail visitor(BusArrivalCard busArrivalCard) {
         return new CardDto.BusArrivalCardDetail(
-                busArrivalCard.getId(),
-                busArrivalCard.getName(),
+                busArrivalCard.getCardId(),
+                busArrivalCard.getCardName(),
                 busArrivalCard.getBusStopName(),
                 busArrivalCard.getCityCode(),
                 busArrivalCard.getBusStopId()
@@ -20,8 +20,8 @@ public class CardToCardDetailDtoVisitor implements CardVisitor {
     @Override
     public CardDto.SubwayArrivalCardDetail visitor(SubwayArrivalCard subwayArrivalCard) {
         return new CardDto.SubwayArrivalCardDetail(
-                subwayArrivalCard.getId(),
-                subwayArrivalCard.getName(),
+                subwayArrivalCard.getCardId(),
+                subwayArrivalCard.getCardName(),
                 subwayArrivalCard.getStationName()
         );
 

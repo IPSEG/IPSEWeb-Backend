@@ -20,11 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(SubwayResource.SUBWAY_ARRIVAL)
 public class SubwayController {
 
-    SubwayService subwayService;
-
-    public SubwayController(SubwayService subwayService) {
-        this.subwayService = subwayService;
-    }
+    private final SubwayService subwayService;
 
     @GetMapping(value = "/v1")
     public ResponseEntity<Response<OpenApiStationArrivalResponse>> getStationArrivalInfo(@RequestParam("name") String name) {

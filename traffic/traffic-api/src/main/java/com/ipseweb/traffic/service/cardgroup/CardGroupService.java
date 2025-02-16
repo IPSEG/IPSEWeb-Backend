@@ -36,8 +36,8 @@ public class CardGroupService {
                                                 .stream()
                                                 .map(c ->
                                                         new CardDto.CardIdAndNameResponse(
-                                                                c.getId(),
-                                                                c.getName())
+                                                                c.getCardId(),
+                                                                c.getCardName())
                                                 ).collect(Collectors.toList())
                                 )
                         )
