@@ -35,12 +35,14 @@ public class CardService {
     }
 
     public void addCard(CardDto.AddRequest addRequest) {
+        // userId, stationName으로 이미 등록된 정보가 있는지 조회
         Card searchCard = subwayArrivalCardRepository.findCardByStationNameAndUserId(addRequest);
+
         if(searchCard != null) {
             throw new CardException(CardErrorCode.CARD_IS_ALREADY_EXIST);
         }
-        Card card = CardFactoryProvider.getFactory(CardType.SUBWAY).createCard(addRequest);
-
+        // Card Entity 생성 및 저장
+        Card card = CardFactoryProvider.getFactory(CardType.from(addRequest.getCardType())).createCard(addRequest);
         cardRepository.save(card);
     }
 }
