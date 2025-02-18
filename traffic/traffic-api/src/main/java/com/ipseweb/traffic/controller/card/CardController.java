@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(CardResource.CARD)
@@ -29,8 +31,8 @@ public class CardController {
                             ))
             })
     @GetMapping("/v1")
-    public ResponseEntity<Response<CardDto.CardDetail>> getCard(@RequestParam("id") Long id) {
-        return ResponseEntityFactory.success(cardService.getCard(id));
+    public ResponseEntity<Response<List<CardDto.GetResponse>>> getCard(CardDto.GetRequest getRequest) {
+        return ResponseEntityFactory.success(cardService.getCard(getRequest));
     }
 
 
@@ -39,14 +41,14 @@ public class CardController {
                     @ApiResponse(description = "JPA 카드 추가",
                             content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = CardDto.Add.class)
+                                    schema = @Schema(implementation = CardDto.AddRequest.class)
                             )
                     )
 
             })
     @PostMapping("/v1/add")
-    public ResponseEntity<Response> addCard(@RequestBody CardDto.Add add) {
-        cardService.addCard(add);
+    public ResponseEntity<Response> addCard(@RequestBody CardDto.AddRequest addRequest) {
+        cardService.addCard(addRequest);
         return ResponseEntityFactory.empty();
     }
 

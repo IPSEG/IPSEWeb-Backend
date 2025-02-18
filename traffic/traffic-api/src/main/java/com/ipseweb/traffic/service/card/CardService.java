@@ -1,20 +1,18 @@
 package com.ipseweb.traffic.service.card;
 
 import com.ipseweb.error.CardErrorCode;
-import com.ipseweb.error.CardGroupErrorCode;
 import com.ipseweb.exception.CardException;
-import com.ipseweb.exception.CardGroupException;
 import com.ipseweb.traffic.domain.card.Card;
-import com.ipseweb.traffic.domain.cardgroup.CardGroup;
 import com.ipseweb.traffic.dto.card.CardDto;
-import com.ipseweb.traffic.dto.card.visitor.CardToCardDetailDtoVisitor;
 import com.ipseweb.traffic.repository.card.CardRepository;
-import com.ipseweb.traffic.repository.cardgroup.CardGroupRepository;
+import com.ipseweb.traffic.repository.card.SubwayArrivalCardRepository;
+import com.ipseweb.traffic.resource.card.type.CardType;
 import com.ipseweb.traffic.service.card.factory.CardFactoryProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,26 +20,26 @@ import org.springframework.stereotype.Service;
 public class CardService {
 
     private final CardRepository cardRepository;
+    private final SubwayArrivalCardRepository subwayArrivalCardRepository;
 
-    private final CardGroupRepository cardGroupRepository;
+    public List<CardDto.GetResponse> getCard(CardDto.GetRequest getRequest) {
 
-    public CardDto.CardDetail getCard(Long cardId) {
+        List<CardDto.GetResponse> result = subwayArrivalCardRepository.findCards(getRequest);
 
-        return cardRepository.findById(cardId).orElseThrow(() -> {
-            log.error("Card is not exist. id : {}", cardId);
+        if(result == null || result.isEmpty()) {
+            log.error("Card is not exist. request Info : {}", getRequest);
             throw new CardException(CardErrorCode.CARD_IS_NOT_EXIST);
-        }).accept(new CardToCardDetailDtoVisitor());
+        }
+
+        return result;
     }
 
-    public void addCard(CardDto.Add add) {
-        CardGroup cardGroup = cardGroupRepository.findById(add.getCardGroupId()).orElseThrow(() -> {
-            log.error("CardGroup not exist.");
-            throw new CardGroupException(CardGroupErrorCode.CARD_GROUP_IS_NOT_EXIST);
-        });
-
-        Card card = CardFactoryProvider.getFactory(add.getCardType()).createCard(add);
-
-        card.setCardGroup(cardGroup);
+    public void addCard(CardDto.AddRequest addRequest) {
+        Card searchCard = subwayArrivalCardRepository.findCardByStationNameAndUserId(addRequest);
+        if(searchCard != null) {
+            throw new CardException(CardErrorCode.CARD_IS_ALREADY_EXIST);
+        }
+        Card card = CardFactoryProvider.getFactory(CardType.SUBWAY).createCard(addRequest);
 
         cardRepository.save(card);
     }
