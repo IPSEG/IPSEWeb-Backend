@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @DiscriminatorColumn(name = "card_type",
         discriminatorType = DiscriminatorType.STRING
 )
-@Table(name = "card_info")
+@Table(name = "card")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder

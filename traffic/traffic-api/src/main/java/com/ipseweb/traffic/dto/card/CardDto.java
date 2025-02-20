@@ -45,6 +45,7 @@ public class CardDto {
     public static class GetRequest {
         private String userId;
         private String cardName;
+        private String stationName;
     }
 
     @NoArgsConstructor

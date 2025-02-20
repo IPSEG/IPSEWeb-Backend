@@ -21,7 +21,8 @@ public class SubwayArrivalCardRepositoryQueryDslCustomImpl implements SubwayArri
                 .select(Projections.constructor(CardDto.GetResponse.class, subwayArrivalCard))
                 .from(subwayArrivalCard)
                 .where(
-                        isUserIdEqual(getRequest.getUserId())
+                        isUserIdEqual(getRequest.getUserId()),
+                        isStationNameEqual(getRequest.getStationName())
                 );
 
         return query.fetch();
