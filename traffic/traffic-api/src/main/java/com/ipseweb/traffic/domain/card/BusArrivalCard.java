@@ -7,11 +7,14 @@ import com.ipseweb.traffic.resource.card.type.CardType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @DiscriminatorValue(value = CardType.Values.BUS)
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SuperBuilder
 public class BusArrivalCard extends Card{
 
     private String busStopName;
@@ -19,13 +22,6 @@ public class BusArrivalCard extends Card{
     private String cityCode;
 
     private String busStopId;
-
-    public BusArrivalCard(String cardName, String busStopName, String cityCode, String busStopId) {
-        super(cardName);
-        this.busStopName = busStopName;
-        this.cityCode = cityCode;
-        this.busStopId = busStopId;
-    }
 
     @Override
     public CardDto.CardDetail accept(CardVisitor visitor) {

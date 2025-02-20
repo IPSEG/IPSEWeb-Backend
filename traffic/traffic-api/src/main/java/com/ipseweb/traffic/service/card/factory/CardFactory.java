@@ -4,5 +4,6 @@ import com.ipseweb.traffic.domain.card.Card;
 import com.ipseweb.traffic.dto.card.CardDto;
 
 public interface CardFactory {
-    Card createCard(CardDto.Add add);
+    Card createCard(CardDto.AddRequest addRequest);
+
 }

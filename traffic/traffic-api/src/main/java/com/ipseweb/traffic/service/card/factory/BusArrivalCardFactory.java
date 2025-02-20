@@ -7,12 +7,12 @@ import com.ipseweb.traffic.dto.card.CardDto;
 
 public class BusArrivalCardFactory implements CardFactory{
     @Override
-    public Card createCard(CardDto.Add add) {
-        return new BusArrivalCard(
-                add.getCardName(),
-                add.getBusStopName(),
-                add.getCityCode(),
-                add.getBusStopId()
-        );
+    public Card createCard(CardDto.AddRequest getRequest) {
+        return BusArrivalCard.builder()
+                .cardName(getRequest.getCardName())
+                .busStopName(getRequest.getBusStopName())
+                .cityCode(getRequest.getCityCode())
+                .busStopId(getRequest.getBusStopId())
+                .build();
     }
 }
