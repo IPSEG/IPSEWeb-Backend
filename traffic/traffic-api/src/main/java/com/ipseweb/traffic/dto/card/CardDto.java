@@ -3,6 +3,7 @@ package com.ipseweb.traffic.dto.card;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.ipseweb.traffic.domain.card.SubwayArrivalCard;
+import com.ipseweb.traffic.resource.card.type.CardType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,7 +32,7 @@ public class CardDto {
         private String userId;
         private String cardName;
         private Long cardGroupId;
-        private String cardType;
+        private CardType cardType;
         private String busStopId;
         private String busStopName;
         private String subwayId;

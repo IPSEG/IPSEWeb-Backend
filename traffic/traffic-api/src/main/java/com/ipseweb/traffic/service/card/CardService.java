@@ -76,7 +76,7 @@ public class CardService {
         }
 
         // Card Entity 생성 및 저장
-        Card card = CardFactoryProvider.getFactory(CardType.from(addRequest.getCardType())).createCard(addRequest);
+        Card card = CardFactoryProvider.getFactory(addRequest.getCardType()).createCard(addRequest);
         cardRepository.save(card);
     }
 }
