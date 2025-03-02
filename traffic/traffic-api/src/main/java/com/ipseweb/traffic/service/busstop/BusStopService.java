@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -43,10 +44,9 @@ public class BusStopService {
     /**
      * 버스 정류장 이름으로 버스 정류장 조회
      */
-    public BusStopResponse findBusStopByNameAndCityCodeAndBusStopId(String busStopName, String cityCode, String busStopId) {
+    public BusStopResponse findBusStopByNameAndCityCodeAndBusStopId(String busStopName, String cityCode, String id) {
         try {
-            Optional<BusStop> busStop = busStopRepository.findByBusStopNameAndCityCodeAndBusStopId(busStopName, cityCode, busStopId);
-
+            Optional<BusStop> busStop = busStopRepository.findByBusStopNameAndCityCodeAndBusStopId(busStopName, cityCode, id);
 
             return new BusStopResponse(
                     busStop.get().getBusStopId(),
@@ -59,7 +59,19 @@ public class BusStopService {
             log.error(e.getMessage().toString());
             throw new TrafficException(e, CommonErrorCode.NO_SEARCH_DATA_ERROR);
         }
+    }
 
+    public List<BusStopResponse> findBusStopByLikeName(String searchBusStopName) {
+        return Optional.ofNullable(busStopRepository.searchBusStopLikeName(searchBusStopName))
+                .map(List::stream)
+                .orElseGet(Stream::empty)
+                .map(busStop -> new BusStopResponse(
+                        busStop.getBusStopId(),
+                        busStop.getBusStopName(),
+                        busStop.getCityCode(),
+                        busStop.getCity(),
+                        busStop.getDetailCity()
+                )).collect(Collectors.toList());
     }
 
 

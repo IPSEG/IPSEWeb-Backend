@@ -36,13 +36,13 @@ public class BusStopController {
                             ))
             })
     @GetMapping("/v1")
-    public ResponseEntity<Response<BusStopResponse>> busStopV1(
-            @RequestParam("busStopName") String busStopName,
-            @RequestParam("cityCode") String cityCode,
-            @RequestParam("busStopId") String busStopId) {
-        BusStopResponse busStopByName = busStopService.findBusStopByNameAndCityCodeAndBusStopId(busStopName, cityCode, busStopId);
-        return ResponseEntityFactory.success(busStopByName);
+    public ResponseEntity<Response<List<BusStopResponse>>> busStopV1(
+            @RequestParam("busStopName") String busStopName) {
+        return ResponseEntityFactory.success(busStopService.findBusStopByLikeName(busStopName));
     }
+
+
+
 
 
 
