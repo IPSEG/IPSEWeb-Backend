@@ -6,8 +6,12 @@ import com.ipseweb.exception.TrafficException;
 import com.ipseweb.traffic.domain.bus.BusStop;
 import com.ipseweb.traffic.dto.busstop.BusStopDto.BusStopResponse;
 import com.ipseweb.traffic.repository.busstop.BusStopRepository;
+import com.ipseweb.traffic.resource.busstop.BusStopResource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,8 +65,15 @@ public class BusStopService {
         }
     }
 
-    public List<BusStopResponse> findBusStopByLikeName(String searchBusStopName) {
-        return Optional.ofNullable(busStopRepository.searchBusStopLikeName(searchBusStopName))
+    /**
+     * 버스 정류장 이름으로 조회
+     * @param searchBusStopName
+     * @return
+     */
+    public List<BusStopResponse> findBusStopByLikeName(Integer pageNumber, String searchBusStopName) {
+        PageRequest pageRequest = PageRequest.of(pageNumber, BusStopResource.BUS_STOP_PAGE_SIZE, Sort.by(Sort.Direction.DESC, "cityCode"));
+        Page<BusStop> result = busStopRepository.searchBusStopPagingLikeName(searchBusStopName, pageRequest);
+        return Optional.ofNullable(result.getContent())
                 .map(List::stream)
                 .orElseGet(Stream::empty)
                 .map(busStop -> new BusStopResponse(
