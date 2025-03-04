@@ -24,12 +24,12 @@ class CardRepositoryTest {
     public void findAllByNameTest() throws Exception {
         //given
         CardGroup cardGroup = new CardGroup("MyCardGroup1");
-        BusArrivalCard busArrivalCard = new BusArrivalCard(
-                "MyyBusCard",
-                "신덕1리",
-                "37040",
-                "ADB354000076"
-        );
+        BusArrivalCard busArrivalCard = BusArrivalCard.builder()
+                .cardName("MyyBusCard")
+                .busStopName("신덕1리")
+                .cityCode("37040")
+                .busStopId("ADB354000076").build();
+
         busArrivalCard.setCardGroup(cardGroup);
         cardRepository.save(busArrivalCard);
 
@@ -39,7 +39,7 @@ class CardRepositoryTest {
          */
 
         //then
-        List<Card> myBusCardList = cardRepository.findAllByName("MyyBusCard");
+        List<Card> myBusCardList = cardRepository.findAllByCardName("MyyBusCard");
 
         Assertions.assertThat(myBusCardList.size()).isEqualTo(1);
 

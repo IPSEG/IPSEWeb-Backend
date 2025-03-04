@@ -19,7 +19,7 @@ public class CardGroup extends BaseEntity {
 
     @Id
     @Column(name = "card_group_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

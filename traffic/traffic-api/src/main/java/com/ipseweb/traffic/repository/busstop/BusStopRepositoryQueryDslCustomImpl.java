@@ -18,8 +18,8 @@ public class BusStopRepositoryQueryDslCustomImpl implements BusStopRepositoryQue
 
     private final JPAQueryFactory queryFactory;
 
-    public BusStopRepositoryQueryDslCustomImpl(EntityManager em) {
-        this.queryFactory  = new JPAQueryFactory(em);
+    public BusStopRepositoryQueryDslCustomImpl(JPAQueryFactory queryFactory) {
+        this.queryFactory = queryFactory;
     }
 
     @Override

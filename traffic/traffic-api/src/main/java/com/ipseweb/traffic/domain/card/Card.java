@@ -5,9 +5,8 @@ import com.ipseweb.traffic.domain.cardgroup.CardGroup;
 import com.ipseweb.traffic.dto.card.CardDto;
 import com.ipseweb.traffic.dto.card.visitor.CardVisitor;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
@@ -15,8 +14,10 @@ import lombok.NoArgsConstructor;
 @DiscriminatorColumn(name = "card_type",
         discriminatorType = DiscriminatorType.STRING
 )
-@Table(name = "card_info")
+@Table(name = "card")
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SuperBuilder
 public abstract class Card extends BaseEntity {
 
     @Id
@@ -33,10 +34,6 @@ public abstract class Card extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "card_group_id")
     private CardGroup cardGroup;
-
-    public Card(String name) {
-        this.cardName = name;
-    }
 
     /**
      * 연관 관계 편의 메서드
