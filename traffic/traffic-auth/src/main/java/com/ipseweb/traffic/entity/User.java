@@ -40,7 +40,7 @@ public class User {
     @Comment("사용자 비밀번호")
     private String userPreviousPassword;
 
-    @Column(name = "user email", nullable = false)
+    @Column(name = "user_email", nullable = false)
     @Comment("사용자 이메일 주소")
     private String userEmail;
 

@@ -2,6 +2,7 @@ package com.ipseweb.traffic.dto.card;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.ipseweb.traffic.domain.card.SubwayArrivalCard;
 import com.ipseweb.traffic.resource.card.type.CardType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,26 +17,18 @@ public class CardDto {
 
 
     public record CardIdAndNameResponse(Long id, String name) {
-
     }
-
     ;
 
     public record MultipleCardIdAndNameResponse(List<CardIdAndNameResponse> list) {
-
     }
 
-    ;
 
-    /**
-     * TODO : 일단 간단하게 가자.
-     */
 
     @NoArgsConstructor
     @AllArgsConstructor
     @Data
-    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-    public static class Add {
+    public static class AddRequest {
         private String userId;
         private String cardName;
         private Long cardGroupId;
@@ -45,6 +38,32 @@ public class CardDto {
         private String subwayId;
         private String stationName;
         private String cityCode;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Data
+    public static class GetRequest {
+        private String userId;
+        private String cardName;
+        private String stationName;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Data
+    public static class GetResponse {
+        private Long cardId;
+        private String cardName;
+        private String userId;
+        private String stationName;
+
+        public GetResponse(SubwayArrivalCard card) {
+            this.cardId = card.getCardId();
+            this.cardName = card.getCardName();
+            this.userId = card.getUserId();
+            this.stationName = card.getStationName();
+        }
     }
 
 
@@ -68,9 +87,7 @@ public class CardDto {
         }
 
         private String busStopName;
-
         private String cityCode;
-
         private String busStopId;
 
     }
@@ -86,7 +103,5 @@ public class CardDto {
             this.stationName = stationName;
         }
     }
-
-
 }
 

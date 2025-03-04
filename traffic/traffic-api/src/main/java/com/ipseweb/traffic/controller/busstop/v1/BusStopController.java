@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.controller.busstop;
+package com.ipseweb.traffic.controller.busstop.v1;
 
 import com.ipseweb.error.Response;
 import com.ipseweb.exception.ResponseEntityFactory;
@@ -22,7 +22,7 @@ import static com.ipseweb.traffic.dto.busstop.BusStopDto.BusStopResponse;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping(BusStopResource.BUS_STOP)
+@RequestMapping(BusStopResource.BUS_STOP_VERSION_1)
 public class BusStopController {
 
     private final BusStopService busStopService;
@@ -35,8 +35,9 @@ public class BusStopController {
                                     schema = @Schema(implementation = BusStopResponse.class)
                             ))
             })
-    @GetMapping("/v1")
-    public ResponseEntity<Response<List<BusStopResponse>>> busStopV1(@RequestParam("pageNumber") Integer pageNumber,
+    @GetMapping
+    public ResponseEntity<Response<List<BusStopResponse>>> busStopV1(
+            @RequestParam("pageNumber") Integer pageNumber,
             @RequestParam("busStopName") String busStopName) {
         return ResponseEntityFactory.success(busStopService.findBusStopByLikeName(pageNumber, busStopName));
     }

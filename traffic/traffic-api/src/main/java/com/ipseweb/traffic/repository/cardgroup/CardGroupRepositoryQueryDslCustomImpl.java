@@ -19,8 +19,8 @@ public class CardGroupRepositoryQueryDslCustomImpl implements CardGroupRepositor
 
     private final JPAQueryFactory jpaQueryFactory;
 
-    public CardGroupRepositoryQueryDslCustomImpl(EntityManager em) {
-        this.jpaQueryFactory = new JPAQueryFactory(em);
+    public CardGroupRepositoryQueryDslCustomImpl(JPAQueryFactory jpaQueryFactory) {
+        this.jpaQueryFactory = jpaQueryFactory;
     }
 
     @Override

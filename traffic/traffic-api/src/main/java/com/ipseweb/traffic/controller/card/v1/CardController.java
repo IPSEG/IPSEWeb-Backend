@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.controller.card;
+package com.ipseweb.traffic.controller.card.v1;
 
 import com.ipseweb.error.Response;
 import com.ipseweb.exception.ResponseEntityFactory;
@@ -13,9 +13,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(CardResource.CARD)
+@RequestMapping(CardResource.CARD_VERSION_1)
 public class CardController {
 
     private final CardService cardService;
@@ -28,9 +30,22 @@ public class CardController {
                                     schema = @Schema(implementation = CardDto.CardDetail.class)
                             ))
             })
-    @GetMapping("/v1")
+    @GetMapping
     public ResponseEntity<Response<CardDto.CardDetail>> getCard(@RequestParam("id") Long id) {
         return ResponseEntityFactory.success(cardService.getCard(id));
+    }
+
+    @Operation(summary = "카드 목록 조회", description = "카드 목록을 조회합니다.",
+            responses = {
+                    @ApiResponse(description = "JPA 카드 목록 조회",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = CardDto.GetResponse.class)
+                            ))
+            })
+    @GetMapping("/v1/cardlist")
+    public ResponseEntity<Response<List<CardDto.GetResponse>>> getCardList(CardDto.GetRequest getRequest) {
+        return ResponseEntityFactory.success(cardService.getCardList(getRequest));
     }
 
 
@@ -39,14 +54,14 @@ public class CardController {
                     @ApiResponse(description = "JPA 카드 추가",
                             content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = CardDto.Add.class)
+                                    schema = @Schema(implementation = CardDto.AddRequest.class)
                             )
                     )
 
             })
-    @PostMapping("/v1/add")
-    public ResponseEntity<Response> addCard(@RequestBody CardDto.Add add) {
-        cardService.addCard(add);
+    @PostMapping("/add")
+    public ResponseEntity<Response> addCard(@RequestBody CardDto.AddRequest addRequest) {
+        cardService.addCard(addRequest);
         return ResponseEntityFactory.empty();
     }
 

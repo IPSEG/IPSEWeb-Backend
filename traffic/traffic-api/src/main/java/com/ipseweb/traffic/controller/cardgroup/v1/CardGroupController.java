@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.controller.cardgroup;
+package com.ipseweb.traffic.controller.cardgroup.v1;
 
 
 import com.ipseweb.error.Response;
@@ -26,7 +26,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping(CardGroupResources.CARD_GROUP)
+@RequestMapping(CardGroupResources.CARD_GROUP_VERSION_1)
 public class CardGroupController {
 
     private final CardGroupService cardGroupService;
@@ -39,7 +39,7 @@ public class CardGroupController {
                                     schema = @Schema(implementation = CardGroupDto.CardGroupResponse.class)
                             ))
             })
-    @GetMapping("/v1")
+    @GetMapping
     public ResponseEntity<Response<List<CardGroupDto.CardGroupResponse>>> getCardGroupList(@Param("name") String name) {
         CardGroupSearchCondition condition = new CardGroupSearchCondition(name);
         return ResponseEntityFactory.success(cardGroupService.getCardGroupList(condition));
@@ -54,7 +54,7 @@ public class CardGroupController {
                                     schema = @Schema(implementation = CardGroupDto.Add.class)
                             ))
             })
-    @PostMapping("/v1/add")
+    @PostMapping("/add")
     public ResponseEntity<Response> addCardGroup(@RequestBody CardGroupDto.Add add ) {
         cardGroupService.addCardGroup(add);
         return ResponseEntityFactory.empty();

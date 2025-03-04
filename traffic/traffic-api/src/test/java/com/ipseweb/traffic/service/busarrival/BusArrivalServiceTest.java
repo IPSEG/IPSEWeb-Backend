@@ -2,7 +2,6 @@ package com.ipseweb.traffic.service.busarrival;
 
 import com.ipseweb.error.Response;
 import com.ipseweb.traffic.dto.busarrival.BusArrivalDto;
-import com.ipseweb.traffic.dto.busarrival.OpenApiBusArrivalResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

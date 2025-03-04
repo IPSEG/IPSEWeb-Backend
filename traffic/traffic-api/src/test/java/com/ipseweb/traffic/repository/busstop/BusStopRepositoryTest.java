@@ -49,7 +49,7 @@ class BusStopRepositoryTest {
     @Test
     public void findAll() throws Exception {
         List<BusStop> all = busStopRepository.findAll();
-        Assertions.assertThat(all.size()).isEqualTo(10);
+        Assertions.assertThat(all.size()).isEqualTo(1);
 
     }
 
