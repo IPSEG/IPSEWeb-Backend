@@ -5,7 +5,7 @@ import com.ipseweb.traffic.dto.card.CardDto;
 
 public class TrafficCardFactory implements CardFactory{
     @Override
-    public Card createCard(CardDto.Add add) {
+    public Card createCard(CardDto.AddRequest getRequest) {
         return null;
     }
 }
