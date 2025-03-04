@@ -7,6 +7,9 @@ import com.ipseweb.traffic.dto.busstop.condition.BusStopSearchCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +54,33 @@ public class BusStopRepositoryQueryDslCustomImpl implements BusStopRepositoryQue
                 .where(busStop.busStopName.contains(name))
                 .fetch();
     }
+
+    /**
+     * bus_stop_name like %name% 쿼리 결과에 대한 Paging 쿼리
+     * @param name
+     * @param pageable
+     * @return
+     */
+    @Override
+    public Page<BusStop> searchBusStopPagingLikeName(String name, Pageable pageable) {
+
+        List<BusStop> contents = queryFactory
+                .selectFrom(busStop)
+                .where(busStop.busStopName.contains(name))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        Long totalCount = queryFactory
+                .select(busStop.count())
+                .from(busStop)
+                .where(busStop.busStopName.contains(name))
+                .fetchOne();
+
+
+        return new PageImpl<>(contents, pageable, totalCount);
+    }
+
 
     private BooleanExpression busStopNameEq(String busStopName) {
         return hasLength(busStopName) ?  busStop.busStopName.eq(busStopName) : null;
