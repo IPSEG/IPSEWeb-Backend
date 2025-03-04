@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.controller.card;
+package com.ipseweb.traffic.controller.card.v1;
 
 import com.ipseweb.error.Response;
 import com.ipseweb.exception.ResponseEntityFactory;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(CardResource.CARD)
+@RequestMapping(CardResource.CARD_VERSION_1)
 public class CardController {
 
     private final CardService cardService;
@@ -28,7 +28,7 @@ public class CardController {
                                     schema = @Schema(implementation = CardDto.CardDetail.class)
                             ))
             })
-    @GetMapping("/v1")
+    @GetMapping
     public ResponseEntity<Response<CardDto.CardDetail>> getCard(@RequestParam("id") Long id) {
         return ResponseEntityFactory.success(cardService.getCard(id));
     }
@@ -44,7 +44,7 @@ public class CardController {
                     )
 
             })
-    @PostMapping("/v1/add")
+    @PostMapping("/add")
     public ResponseEntity<Response> addCard(@RequestBody CardDto.Add add) {
         cardService.addCard(add);
         return ResponseEntityFactory.empty();

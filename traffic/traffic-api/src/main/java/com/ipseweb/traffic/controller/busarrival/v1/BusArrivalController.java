@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.controller.busarrival;
+package com.ipseweb.traffic.controller.busarrival.v1;
 
 import com.ipseweb.error.Response;
 import com.ipseweb.traffic.dto.busarrival.BusArrivalDto;
@@ -23,7 +23,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping(BusArrivalResource.BUS_ARRIVAL)
+@RequestMapping(BusArrivalResource.BUS_ARRIVAL_VERSION_1)
 public class BusArrivalController {
 
     private final BusStopService busStopService;
@@ -37,7 +37,7 @@ public class BusArrivalController {
                                     schema = @Schema(implementation = BusArrivalDto.BusArrivalInfoResponse.class)
                             ))
             })
-    @PostMapping("/v1")
+    @PostMapping
     public ResponseEntity<Response<List<BusArrivalDto.BusArrivalInfoResponse>>> busArrivalInfoV1(
             @RequestBody BusArrivalDto.BusArrivalInfoRequest busArrivalInfoRequest) {
 
