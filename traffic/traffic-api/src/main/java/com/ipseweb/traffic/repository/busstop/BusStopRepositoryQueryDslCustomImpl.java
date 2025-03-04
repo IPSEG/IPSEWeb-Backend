@@ -8,6 +8,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.ipseweb.traffic.domain.bus.QBusStop.busStop;
@@ -36,6 +37,19 @@ public class BusStopRepositoryQueryDslCustomImpl implements BusStopRepositoryQue
                 .orElseThrow(
                         () -> new TrafficException(CommonErrorCode.NO_SEARCH_DATA_ERROR)
                 ));
+    }
+
+    /**
+     * %name% 조회
+     * @param name
+     * @return
+     */
+    @Override
+    public List<BusStop> searchBusStopLikeName(String name) {
+        return queryFactory
+                .selectFrom(busStop)
+                .where(busStop.busStopName.contains(name))
+                .fetch();
     }
 
     private BooleanExpression busStopNameEq(String busStopName) {

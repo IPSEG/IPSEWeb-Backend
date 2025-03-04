@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.controller.subway;
+package com.ipseweb.traffic.controller.subway.v1;
 
 import com.ipseweb.error.Response;
 import com.ipseweb.traffic.dto.subway.OpenApiStationArrivalResponse;
@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping(SubwayResource.SUBWAY_ARRIVAL)
+@RequestMapping(SubwayResource.SUBWAY_ARRIVAL_VERSION_1)
 public class SubwayController {
 
     private final SubwayService subwayService;
 
-    @GetMapping(value = "/v1")
+    @GetMapping
     public ResponseEntity<Response<OpenApiStationArrivalResponse>> getStationArrivalInfo(@RequestParam("name") String name) {
         return subwayService.getStationArrivalInfo(name);
     }
