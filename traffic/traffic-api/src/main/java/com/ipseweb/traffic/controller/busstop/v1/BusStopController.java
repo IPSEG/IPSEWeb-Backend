@@ -2,6 +2,7 @@ package com.ipseweb.traffic.controller.busstop.v1;
 
 import com.ipseweb.error.Response;
 import com.ipseweb.exception.ResponseEntityFactory;
+import com.ipseweb.traffic.dto.busstop.BusStopDto;
 import com.ipseweb.traffic.resource.busstop.BusStopResource;
 import com.ipseweb.traffic.service.busstop.BusStopService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,7 +37,7 @@ public class BusStopController {
                             ))
             })
     @GetMapping
-    public ResponseEntity<Response<List<BusStopResponse>>> busStopV1(
+    public ResponseEntity<Response<BusStopDto.BusStopPagingResponse>> busStopV1(
             @RequestParam("pageNumber") Integer pageNumber,
             @RequestParam("busStopName") String busStopName) {
         return ResponseEntityFactory.success(busStopService.findBusStopByLikeName(pageNumber, busStopName));

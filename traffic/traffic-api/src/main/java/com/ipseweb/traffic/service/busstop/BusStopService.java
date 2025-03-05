@@ -4,6 +4,7 @@ package com.ipseweb.traffic.service.busstop;
 import com.ipseweb.error.CommonErrorCode;
 import com.ipseweb.exception.TrafficException;
 import com.ipseweb.traffic.domain.bus.BusStop;
+import com.ipseweb.traffic.dto.busstop.BusStopDto;
 import com.ipseweb.traffic.dto.busstop.BusStopDto.BusStopResponse;
 import com.ipseweb.traffic.repository.busstop.BusStopRepository;
 import com.ipseweb.traffic.resource.busstop.BusStopResource;
@@ -70,10 +71,10 @@ public class BusStopService {
      * @param searchBusStopName
      * @return
      */
-    public List<BusStopResponse> findBusStopByLikeName(Integer pageNumber, String searchBusStopName) {
+    public BusStopDto.BusStopPagingResponse findBusStopByLikeName(Integer pageNumber, String searchBusStopName) {
         PageRequest pageRequest = PageRequest.of(pageNumber, BusStopResource.BUS_STOP_PAGE_SIZE, Sort.by(Sort.Direction.DESC, "cityCode"));
         Page<BusStop> result = busStopRepository.searchBusStopPagingLikeName(searchBusStopName, pageRequest);
-        return Optional.ofNullable(result.getContent())
+        List<BusStopResponse> busStopResponseList = Optional.ofNullable(result.getContent())
                 .map(List::stream)
                 .orElseGet(Stream::empty)
                 .map(busStop -> new BusStopResponse(
@@ -83,6 +84,14 @@ public class BusStopService {
                         busStop.getCity(),
                         busStop.getDetailCity()
                 )).collect(Collectors.toList());
+
+        return new BusStopDto.BusStopPagingResponse(
+                busStopResponseList,
+                result.hasNext(),
+                result.hasPrevious(),
+                result.getSize(),
+                result.getNumberOfElements()
+        );
     }
 
 

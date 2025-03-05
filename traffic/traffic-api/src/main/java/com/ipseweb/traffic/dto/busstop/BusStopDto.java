@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.List;
+
 public class BusStopDto {
 
     @Data
@@ -19,5 +21,14 @@ public class BusStopDto {
     }
 
 
-
+    @Data
+    @AllArgsConstructor
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+    public static class BusStopPagingResponse {
+        List<BusStopResponse>  busStopList;
+        Boolean hasNext;
+        Boolean hasPrevious;
+        Integer pageCount;
+        Integer currentPageCount;
+    }
 }
