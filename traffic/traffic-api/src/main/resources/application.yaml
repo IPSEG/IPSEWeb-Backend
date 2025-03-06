@@ -6,6 +6,5 @@ server:
 spring:
   application:
     name: traffic-api
-  profiles:
-    active: hoyo
+
 

@@ -4,8 +4,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/traffic?currentSchema=api
-    username: seungbinyang
-    password: ENC(wzYzUfh61YBDHtAIXgLVhp/SXC4pW6It)
+    username: api
+    password: ENC(D58GnPMQ7DBOooK1rpwAz79nSkNwxPAD)
 
   jpa:
     hibernate:

@@ -64,7 +64,7 @@ project(':traffic-auth') {
 
 project(':traffic-api') {
     dependencies {
-        compileOnly project(':traffic-common')
+        implementation project(':traffic-common')
     }
 }
 
