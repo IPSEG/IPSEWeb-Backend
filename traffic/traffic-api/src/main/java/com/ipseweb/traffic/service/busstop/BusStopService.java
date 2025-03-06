@@ -90,7 +90,8 @@ public class BusStopService {
                 result.hasNext(),
                 result.hasPrevious(),
                 result.getSize(),
-                result.getNumberOfElements()
+                result.getNumberOfElements(),
+                result.getNumber()
         );
     }
 

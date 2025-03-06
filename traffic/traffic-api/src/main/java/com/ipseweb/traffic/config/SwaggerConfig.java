@@ -2,8 +2,6 @@ package com.ipseweb.traffic.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.models.OpenAPI;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +20,7 @@ public class SwaggerConfig {
         return GroupedOpenApi
                 .builder()
                 .group("API-버스정류장")
-                .pathsToMatch("/api/v*/traffic/bus-stop/**")
+                .pathsToMatch("/v*/traffic/bus-stop/**")
                 .build();
     }
 
@@ -31,7 +29,7 @@ public class SwaggerConfig {
         return GroupedOpenApi
                 .builder()
                 .group("API-버스도착정보")
-                .pathsToMatch("/api//v*/traffic/bus-arrival/**")
+                .pathsToMatch("/v*/traffic/bus-arrival/**")
                 .build();
     }
 
@@ -41,7 +39,7 @@ public class SwaggerConfig {
         return GroupedOpenApi
                 .builder()
                 .group("API-지하철")
-                .pathsToMatch("/api/v*/traffic/subway-arrival/**")
+                .pathsToMatch("/v*/traffic/subway-arrival/**")
                 .build();
     }
 
@@ -50,7 +48,7 @@ public class SwaggerConfig {
         return GroupedOpenApi
                 .builder()
                 .group("API-카드그룹")
-                .pathsToMatch("/api/v*/traffic/card-group/**")
+                .pathsToMatch("/v*/traffic/card-group/**")
                 .build();
     }
 
@@ -59,7 +57,7 @@ public class SwaggerConfig {
         return GroupedOpenApi
                 .builder()
                 .group("API-카드")
-                .pathsToMatch("/api/v*/traffic/card/**")
+                .pathsToMatch("/v*/traffic/card/**")
                 .build();
     }
 

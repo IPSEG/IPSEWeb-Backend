@@ -30,5 +30,6 @@ public class BusStopDto {
         Boolean hasPrevious;
         Integer pageCount;
         Integer currentPageCount;
+        Integer currentPageNumber;
     }
 }
