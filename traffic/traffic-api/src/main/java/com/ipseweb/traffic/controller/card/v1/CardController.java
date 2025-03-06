@@ -43,7 +43,7 @@ public class CardController {
                                     schema = @Schema(implementation = CardDto.GetResponse.class)
                             ))
             })
-    @GetMapping("/lis")
+    @GetMapping("/list")
     public ResponseEntity<Response<List<CardDto.GetResponse>>> getCardList(CardDto.GetRequest getRequest) {
         return ResponseEntityFactory.success(cardService.getCardList(getRequest));
     }

@@ -68,7 +68,7 @@ public class CardService {
         }
 
         // addRequest의 cardGroupId 정보 조회 cardGroup 정보를 전달 안했을 시 default 값 지정
-        CardGroup cardGroup = cardGroupRepository.findById(addRequest.getCardGroupId()).orElse(null);
+        CardGroup cardGroup = cardGroupRepository.findById(1L).orElse(null);
 
         // TODO : 임시로 1 설정하도록 지정 추후 카드 그룹 관리 서비스 추가 필요
         if(cardGroup == null) {
