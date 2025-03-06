@@ -56,6 +56,11 @@ subprojects {
     }
 }
 
+project(':traffic-auth') {
+    dependencies {
+        compileOnly project(':traffic-common')
+    }
+}
 
 project(':traffic-api') {
     dependencies {
@@ -65,7 +70,7 @@ project(':traffic-api') {
 
 project(':traffic-batch') {
     dependencies {
-        compileOnly project(':traffic-common')
+        implementation project(':traffic-common')
     }
 }
 

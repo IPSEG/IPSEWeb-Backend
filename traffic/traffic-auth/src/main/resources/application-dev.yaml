@@ -6,7 +6,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://host.docker.internal:5432/traffic?currentSchema=auth
     username: auth
-    password: auth123
+    password: ENC(16xoo/EqEYHxJQG+jJuZHirxVcTyTSz+)
   jpa:
     show-sql: true
     hibernate:

@@ -1,11 +1,11 @@
 spring:
   application:
-    name: traffic-dev
+    name: traffic-api
 
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/ipse
-    username: postgres
-    password: qwe123
+    url: jdbc:postgresql://host.docker.internal:5432/traffic?currentSchema=api
+    username: api
+    password: ENC(D58GnPMQ7DBOooK1rpwAz79nSkNwxPAD)
 
   jpa:
     hibernate:
@@ -15,3 +15,27 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+
+    defer-datasource-initialization: true
+
+  openapi:
+    subway:
+      apiKey: ENC(ZHhyrqpYzuxZ09onTfn+eIboFAcR6JMQZG5l8kPnTGXeli0io2uSgEbXkUgGKQn8)
+      url:
+        arrivalInfo: http://swopenAPI.seoul.go.kr/api/subway/%s/json/realtimeStationArrival/%s/%s/%s
+
+    busStop:
+      apiKey: test
+      url:
+        busStopInfo: https://api.odcloud.kr/api/15067528/v1/uddi:eb02ec03-6edd-4cb0-88b8-eda22ca55e80?page=%d&perPage=%d&serviceKey=%s
+
+    busArrival:
+      apiKey: test
+      url:
+        busArrivalInfo: http://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=%s&pageNo=%d&numOfRows=%d&_type=json&cityCode=%s&nodeId=%s
+
+  sql:
+    init:
+      mode: always
+
+
