@@ -42,10 +42,16 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(request -> request.requestMatchers(new AntPathRequestMatcher("/rsa", HttpMethod.GET.name())).permitAll())
-                .authorizeHttpRequests(request -> request.requestMatchers(new AntPathRequestMatcher("/user/join", HttpMethod.POST.name())).permitAll())
-                .authorizeHttpRequests(request -> request.requestMatchers(new AntPathRequestMatcher("/user/login", HttpMethod.POST.name())).permitAll())
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/rsa", HttpMethod.GET.name()),
+                                new AntPathRequestMatcher("/user/join", HttpMethod.POST.name()),
+                                new AntPathRequestMatcher("/user/login", HttpMethod.POST.name())
+                        ).permitAll()
+                        .anyRequest().authenticated()  // 그 외의 요청은 인증 필요
+                )
                 .build();
     }
+
 }
 
