@@ -49,9 +49,10 @@ public class BusStopService {
     /**
      * 버스 정류장 이름으로 버스 정류장 조회
      */
-    public BusStopResponse findBusStopByNameAndCityCodeAndBusStopId(String busStopName, String cityCode, String id) {
+    public BusStopResponse findBusStopByBusStopId(String busStopId) {
         try {
-            Optional<BusStop> busStop = busStopRepository.findByBusStopNameAndCityCodeAndBusStopId(busStopName, cityCode, id);
+            Optional<BusStop> busStop = busStopRepository.findById(busStopId);
+
 
             return new BusStopResponse(
                     busStop.get().getBusStopId(),

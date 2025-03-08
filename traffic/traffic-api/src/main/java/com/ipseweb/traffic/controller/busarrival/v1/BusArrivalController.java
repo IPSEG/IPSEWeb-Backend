@@ -2,7 +2,6 @@ package com.ipseweb.traffic.controller.busarrival.v1;
 
 import com.ipseweb.error.Response;
 import com.ipseweb.traffic.dto.busarrival.BusArrivalDto;
-import com.ipseweb.traffic.dto.busarrival.OpenApiBusArrivalResponse;
 import com.ipseweb.traffic.dto.busstop.BusStopDto;
 import com.ipseweb.traffic.resource.busarrival.BusArrivalResource;
 import com.ipseweb.traffic.service.busarrival.BusArrivalService;
@@ -39,13 +38,11 @@ public class BusArrivalController {
             })
     @PostMapping
     public ResponseEntity<Response<List<BusArrivalDto.BusArrivalInfoResponse>>> busArrivalInfoV1(
-            @RequestBody BusArrivalDto.BusArrivalInfoRequest busArrivalInfoRequest) {
+            @RequestParam("BusStopId") String busStopId) {
 
 //      1. 버스 정류장 이름으로 버스 정류장 정보 조회
-        BusStopDto.BusStopResponse busStopResponse = busStopService.findBusStopByNameAndCityCodeAndBusStopId(
-                busArrivalInfoRequest.getBusStopName(),
-                busArrivalInfoRequest.getCityCode(),
-                busArrivalInfoRequest.getBusStopId()
+        BusStopDto.BusStopResponse busStopResponse = busStopService.findBusStopByBusStopId(
+                busStopId
                 );
 
 //      2. 버스 정류장 정보로 버스 도착 정보 조회
