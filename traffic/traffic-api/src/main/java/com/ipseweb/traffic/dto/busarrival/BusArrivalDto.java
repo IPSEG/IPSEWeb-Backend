@@ -23,6 +23,10 @@ public class BusArrivalDto {
         private String busStopName;
         private String routeType;
         private String vehicleType;
+        private Long arrivePrevStationCnt;
+        private Long arriveSeconds;
+        private String routeId;
+        private String routeNo;
     }
 
 
