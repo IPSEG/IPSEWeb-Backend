@@ -38,7 +38,7 @@ public class BusArrivalController {
             })
     @PostMapping
     public ResponseEntity<Response<List<BusArrivalDto.BusArrivalInfoResponse>>> busArrivalInfoV1(
-            @RequestParam("BusStopId") String busStopId) {
+            @RequestParam("busStopId") String busStopId) {
 
 //      1. 버스 정류장 이름으로 버스 정류장 정보 조회
         BusStopDto.BusStopResponse busStopResponse = busStopService.findBusStopByBusStopId(

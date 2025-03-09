@@ -34,7 +34,13 @@ public class BusArrivalService {
                         openApiBusArrivalData.getBusStopId(),
                         openApiBusArrivalData.getBusStopName(),
                         openApiBusArrivalData.getRouteType(),
-                        openApiBusArrivalData.getVehicleType()))
+                        openApiBusArrivalData.getVehicleType(),
+                        openApiBusArrivalData.getArrivePrevStationCnt(),
+                        openApiBusArrivalData.getArriveSeconds(),
+                        openApiBusArrivalData.getRouteId(),
+                        openApiBusArrivalData.getRouteNo()
+                        )
+                )
                 .collect(Collectors.toList());
 
         return ResponseEntityFactory.success(collect);
