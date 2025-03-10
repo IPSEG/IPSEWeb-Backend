@@ -36,7 +36,7 @@ public class BusArrivalController {
                                     schema = @Schema(implementation = BusArrivalDto.BusArrivalInfoResponse.class)
                             ))
             })
-    @PostMapping
+    @GetMapping
     public ResponseEntity<Response<List<BusArrivalDto.BusArrivalInfoResponse>>> busArrivalInfoV1(
             @RequestParam("busStopId") String busStopId) {
 
