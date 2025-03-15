@@ -32,7 +32,12 @@ spring:
     busArrival:
       apiKey: test
       url:
-        busArrivalInfo: http://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=%s&pageNo=%d&numOfRows=%d&_type=json&cityCode=%s&nodeId=%s
+        busArrivalInfo: https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=%s&pageNo=%d&numOfRows=%d&_type=json&cityCode=%s&nodeId=%s
+
+    busRoute:
+      apiKey: ENC(wcdAv8sV3W381IwH2dAY8r0LMLgz+vwj89tKGUJaomdQ+9iYVhLWzeneCvYom/mJuFoXXlgxtbJ/FhZj/GIyneFgwipqL9iN0/NP/dziKa702ZJ7O98HPY64iv4GyHLMmAVLL7ISTNQ=)
+      url:
+        busRouteBasicInfo: https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteInfoIem?serviceKey=%s&_type=json&cityCode=%s&routeId=%s
 
   sql:
     init:

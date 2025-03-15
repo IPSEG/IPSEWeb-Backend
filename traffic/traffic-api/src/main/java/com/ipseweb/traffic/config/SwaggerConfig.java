@@ -61,5 +61,14 @@ public class SwaggerConfig {
                 .build();
     }
 
+    @Bean
+    public GroupedOpenApi busRouteApi() {
+        return GroupedOpenApi
+                .builder()
+                .group("API-버스노선")
+                .pathsToMatch("/v*/traffic/bus-route/**")
+                .build();
+    }
+
 
 }
