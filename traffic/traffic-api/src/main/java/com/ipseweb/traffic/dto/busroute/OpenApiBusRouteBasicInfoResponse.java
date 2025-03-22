@@ -7,13 +7,12 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -43,12 +42,30 @@ public class OpenApiBusRouteBasicInfoResponse {
         private String resultMsg;
     }
 
+    /**
+     * OpenApiBusArrivalDatas custom JsonDeserializer
+     */
+    public static class EmptyStringAsNullDatasDeserializer extends JsonDeserializer<OpenApiBusRouteBasicInfoDatas> {
+        @Override
+        public OpenApiBusRouteBasicInfoDatas deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+            JsonNode node = p.readValueAsTree();
+
+            if (node == null || node.isNull() || (node.isTextual() && node.asText().isEmpty())) {
+                return new OpenApiBusRouteBasicInfoDatas(new OpenApiBusRouteBasicInfoData(
+                ));
+            }
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.treeToValue(node, OpenApiBusRouteBasicInfoDatas.class);
+        }
+    }
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     public static class OpenApiBusRouteBasicInfoBody {
         @JsonProperty("items")
+        @JsonDeserialize(using = EmptyStringAsNullDatasDeserializer.class)
         private OpenApiBusRouteBasicInfoDatas items;
     }
 
