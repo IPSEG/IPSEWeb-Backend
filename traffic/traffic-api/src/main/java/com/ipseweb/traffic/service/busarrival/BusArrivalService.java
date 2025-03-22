@@ -2,16 +2,17 @@ package com.ipseweb.traffic.service.busarrival;
 
 import com.ipseweb.error.Response;
 import com.ipseweb.exception.ResponseEntityFactory;
-import com.ipseweb.traffic.dto.busarrival.BusArrivalDto;
 import com.ipseweb.traffic.dto.busarrival.OpenApiBusArrivalResponse;
 import com.ipseweb.util.Request;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.util.UriEncoder;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.ipseweb.traffic.dto.busarrival.BusArrivalDto.*;
@@ -30,18 +31,25 @@ public class BusArrivalService {
         String url = String.format(arrivalInfoUrl, apiKey, 1, 1000, cityCode, busStopId);
         OpenApiBusArrivalResponse response = Request.requestGet(url, OpenApiBusArrivalResponse.class);
 
-        List<BusArrivalInfoResponse> collect = response.getResponse().getBody().getItems().getItem().stream().map(openApiBusArrivalData -> new BusArrivalInfoResponse(
-                        openApiBusArrivalData.getBusStopId(),
-                        openApiBusArrivalData.getBusStopName(),
-                        openApiBusArrivalData.getRouteType(),
-                        openApiBusArrivalData.getVehicleType(),
-                        openApiBusArrivalData.getArrivePrevStationCnt(),
-                        openApiBusArrivalData.getArriveSeconds(),
-                        openApiBusArrivalData.getRouteId(),
-                        openApiBusArrivalData.getRouteNo()
-                        )
-                )
-                .collect(Collectors.toList());
+
+        List<BusArrivalInfoResponse> collect =
+                Optional.ofNullable(response)
+                        .map(OpenApiBusArrivalResponse::getResponse)
+                        .map(OpenApiBusArrivalResponse.Response::getBody)
+                        .map(OpenApiBusArrivalResponse.OpenApiBusArrivalBody::getItems)
+                        .map(OpenApiBusArrivalResponse.OpenApiBusArrivalDatas::getItem)
+                        .orElseGet(() -> Collections.emptyList())
+                        .stream().map(openApiBusArrivalData -> new BusArrivalInfoResponse(
+                                        Optional.ofNullable(openApiBusArrivalData.getBusStopId()).orElseGet( () -> StringUtils.EMPTY),
+                                        Optional.ofNullable(openApiBusArrivalData.getBusStopName()).orElseGet( () -> StringUtils.EMPTY),
+                                        Optional.ofNullable(openApiBusArrivalData.getRouteType()).orElseGet(() -> StringUtils.EMPTY),
+                                        Optional.ofNullable(openApiBusArrivalData.getVehicleType()).orElseGet( () -> StringUtils.EMPTY),
+                                        Optional.ofNullable(openApiBusArrivalData.getArrivePrevStationCnt()).orElseGet( () -> 0L),
+                                        Optional.ofNullable(openApiBusArrivalData.getArriveSeconds()).orElseGet( () -> 0L),
+                                        Optional.ofNullable(openApiBusArrivalData.getRouteId()).orElseGet( () -> StringUtils.EMPTY),
+                                        Optional.ofNullable(openApiBusArrivalData.getRouteNo()).orElseGet( () -> StringUtils.EMPTY)
+                                )
+                        ).collect(Collectors.toList());
 
         return ResponseEntityFactory.success(collect);
     }
