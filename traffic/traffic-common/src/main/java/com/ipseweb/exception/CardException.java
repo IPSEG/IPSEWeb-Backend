@@ -2,7 +2,7 @@ package com.ipseweb.exception;
 
 import com.ipseweb.error.ErrorCode;
 
-public class CardException extends TrafficException{
+public class CardException extends TrafficException {
     public CardException(ErrorCode errorCode) {
         super(errorCode);
     }
