@@ -17,10 +17,10 @@ import java.util.List;
 
 
 @SpringBootTest
-class BusArrivalServiceTest {
+class BusArrivalOpenApiServiceTest {
 
     @Autowired
-    BusArrivalService busArrivalService;
+    BusArrivalOpenApiService busArrivalOpenApiService;
 
 
     String apiKey = "ldBxM3pP5Yn7M4b7Rva1vIySjE8KSyi5WfIlUsMwAWOfCnvq9o2r2jqoe12wQXw8SLWkZe8DlR2RGvgXIt2IRQ%3D%3D";
@@ -59,7 +59,7 @@ class BusArrivalServiceTest {
     @Test
     @DisplayName("버스 도착 OPEN API 테스트2")
     public void busArrivalInfoOpenApiTest2() throws Exception {
-        ResponseEntity<Response<List<BusArrivalDto.BusArrivalInfoResponse>>> response = busArrivalService.findBusArrivalInfo("DJB8001793", "25");
+        ResponseEntity<Response<List<BusArrivalDto.BusArrivalInfoResponse>>> response = busArrivalOpenApiService.findBusArrivalInfo("DJB8001793", "25");
         System.out.println(response);
     }
 
