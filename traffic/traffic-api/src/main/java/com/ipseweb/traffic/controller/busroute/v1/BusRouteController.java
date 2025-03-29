@@ -42,7 +42,7 @@ public class BusRouteController {
     @GetMapping("/basic")
     public ResponseEntity<Response<BusRouteBasicInfoResponse>> busRouteBasicInfoV1(
             @RequestParam("cityCode") String cityCode, @RequestParam("routeId") String routeId) {
-        LocalDateTime now = LocalDateTime.now().withSecond(0).withNano(0);
+        LocalDateTime now = LocalDateTime.now().withHour(0).withSecond(0).withNano(0);
         String formattedTime = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         return ResponseEntityFactory.success(busRouteCacheService.findBusRouteBasicInfo(cityCode, routeId, formattedTime));
     }
