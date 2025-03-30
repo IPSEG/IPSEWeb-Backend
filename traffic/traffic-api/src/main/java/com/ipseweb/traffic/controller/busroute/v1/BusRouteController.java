@@ -30,7 +30,6 @@ import static com.ipseweb.traffic.dto.busroute.BusRouteDto.*;
 public class BusRouteController {
     private final BusRouteCacheService busRouteCacheService;
 
-
     @Operation(summary = "버스 노선 정보 조회", description = "버스 노선 기본 정보를 조회합니다.",
             responses = {
                     @ApiResponse(description = "JPA 버스 노선 기본 정보 조회",

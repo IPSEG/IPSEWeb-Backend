@@ -6,18 +6,20 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableCaching
+@Profile({"hoyo", "seungbin"})
 public class LocalCacheConfig {
     @Bean
     public CacheManager cacheManager() {
         CaffeineCacheManager cm = new CaffeineCacheManager("TrafficBasicCache");
         cm.setCaffeine(trafficBasicCacheBuilder());
-        cm.registerCustomCache("busArrivalCache", busArrivalCacheBuilder().build());
-        cm.registerCustomCache("busRouteCache", busRouteCacheBuilder().build());
+        cm.registerCustomCache("BusArrivalCache", busArrivalCacheBuilder().build());
+        cm.registerCustomCache("BusRouteCache", busRouteCacheBuilder().build());
         return cm;
     }
 
