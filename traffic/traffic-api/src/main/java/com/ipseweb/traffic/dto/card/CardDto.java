@@ -45,8 +45,7 @@ public class CardDto {
     @Data
     public static class GetRequest {
         private String userId;
-        private String cardName;
-        private String stationName;
+        private Long cardGroupId;
     }
 
     @NoArgsConstructor
@@ -73,6 +72,7 @@ public class CardDto {
     public static abstract class CardDetail {
         private Long id;
         private String name;
+        private CardType cardType;
     }
 
     @Data
@@ -80,7 +80,7 @@ public class CardDto {
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class BusArrivalCardDetail extends CardDetail {
         public BusArrivalCardDetail(Long id, String cardName, String busStopName, String cityCode, String busStopId) {
-            super(id, cardName);
+            super(id, cardName, CardType.BUS);
             this.busStopName = busStopName;
             this.cityCode = cityCode;
             this.busStopId = busStopId;
@@ -99,7 +99,7 @@ public class CardDto {
         private String stationName;
 
         public SubwayArrivalCardDetail(Long id, String cardName, String stationName) {
-            super(id, cardName);
+            super(id, cardName, CardType.SUBWAY);
             this.stationName = stationName;
         }
     }

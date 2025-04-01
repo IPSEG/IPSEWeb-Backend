@@ -30,4 +30,9 @@ public enum CardType {
         public static final String SUBWAY = "SUBWAY";
         public static final String TRAFFIC  = "TRAFFIC";
     }
+
+    @Override
+    public String toString() {
+        return toValue();
+    }
 }
