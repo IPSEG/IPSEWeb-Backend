@@ -21,7 +21,7 @@ import static com.ipseweb.traffic.dto.busroute.BusRouteDto.*;
 
 @Service
 @Slf4j
-public class BusRouteService {
+public class BusRouteOpenApiService {
 
     @Value("${spring.openapi.busArrival.apiKey}")
     private String apiKey;
@@ -29,7 +29,7 @@ public class BusRouteService {
     @Value("${spring.openapi.busRoute.url.busRouteBasicInfo}")
     private String busRouteBasicInfoUrl;
 
-    public ResponseEntity<Response<BusRouteBasicInfoResponse>> findBusRouteBasicInfo(String cityCode, String routeId) {
+    public BusRouteBasicInfoResponse findBusRouteBasicInfo(String cityCode, String routeId) {
         String url = String.format(busRouteBasicInfoUrl, apiKey, cityCode, routeId);
         OpenApiBusRouteBasicInfoResponse response = Request.requestGet(url, OpenApiBusRouteBasicInfoResponse.class);
 
@@ -62,7 +62,7 @@ public class BusRouteService {
         );
 
 
-        return ResponseEntityFactory.success(busRouteBasicInfoResponse);
+        return busRouteBasicInfoResponse;
     }
 
 

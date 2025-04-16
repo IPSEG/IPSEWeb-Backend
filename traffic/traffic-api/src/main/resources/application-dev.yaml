@@ -25,17 +25,24 @@ spring:
         arrivalInfo: http://swopenAPI.seoul.go.kr/api/subway/%s/json/realtimeStationArrival/%s/%s/%s
 
     busStop:
-      apiKey: test
+      apiKey: ENC(wcdAv8sV3W381IwH2dAY8r0LMLgz+vwj89tKGUJaomdQ+9iYVhLWzeneCvYom/mJuFoXXlgxtbJ/FhZj/GIyneFgwipqL9iN0/NP/dziKa702ZJ7O98HPY64iv4GyHLMmAVLL7ISTNQ=)
       url:
         busStopInfo: https://api.odcloud.kr/api/15067528/v1/uddi:eb02ec03-6edd-4cb0-88b8-eda22ca55e80?page=%d&perPage=%d&serviceKey=%s
 
     busArrival:
-      apiKey: test
+      apiKey: ENC(wcdAv8sV3W381IwH2dAY8r0LMLgz+vwj89tKGUJaomdQ+9iYVhLWzeneCvYom/mJuFoXXlgxtbJ/FhZj/GIyneFgwipqL9iN0/NP/dziKa702ZJ7O98HPY64iv4GyHLMmAVLL7ISTNQ=)
       url:
-        busArrivalInfo: http://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=%s&pageNo=%d&numOfRows=%d&_type=json&cityCode=%s&nodeId=%s
+        busArrivalInfo: https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoArvlPrearngeInfoList?serviceKey=%s&pageNo=%d&numOfRows=%d&_type=json&cityCode=%s&nodeId=%s
+
+    busRoute:
+      apiKey: ENC(wcdAv8sV3W381IwH2dAY8r0LMLgz+vwj89tKGUJaomdQ+9iYVhLWzeneCvYom/mJuFoXXlgxtbJ/FhZj/GIyneFgwipqL9iN0/NP/dziKa702ZJ7O98HPY64iv4GyHLMmAVLL7ISTNQ=)
+      url:
+        busRouteBasicInfo: https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteInfoIem?serviceKey=%s&_type=json&cityCode=%s&routeId=%s
 
   sql:
     init:
       mode: always
 
-
+  redis:
+    host: host.docker.internal
+    port: 6379
