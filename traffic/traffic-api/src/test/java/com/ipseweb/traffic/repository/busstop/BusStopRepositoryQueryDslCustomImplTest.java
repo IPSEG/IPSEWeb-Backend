@@ -1,7 +1,7 @@
 package com.ipseweb.traffic.repository.busstop;
 
 import com.ipseweb.exception.TrafficException;
-import com.ipseweb.traffic.domain.bus.BusStop;
+import com.ipseweb.traffic.domain.bus.entity.BusStop;
 import com.ipseweb.traffic.dto.busstop.condition.BusStopSearchCondition;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.springframework.data.domain.Sort.*;
+import static org.springframework.data.domain.Sort.Direction;
+import static org.springframework.data.domain.Sort.by;
 
 @SpringBootTest
 class BusStopRepositoryQueryDslCustomImplTest {

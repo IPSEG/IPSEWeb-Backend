@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.domain.subway;
+package com.ipseweb.traffic.domain.subway.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

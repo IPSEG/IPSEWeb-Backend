@@ -1,13 +1,12 @@
 package com.ipseweb.traffic.service.busstop;
 
 
-import com.ipseweb.traffic.domain.BusStop;
+import com.ipseweb.traffic.domain.bus.entity.BusStop;
 import com.ipseweb.traffic.dto.busstop.OpenApiBusStopData;
 import com.ipseweb.traffic.dto.busstop.OpenApiBusStopResponse;
 import com.ipseweb.traffic.repository.busstop.BusStopRepository;
 import com.ipseweb.util.Request;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.sql.ast.tree.AbstractUpdateOrDeleteStatement;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

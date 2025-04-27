@@ -3,7 +3,7 @@ package com.ipseweb.traffic.service.busstop;
 
 import com.ipseweb.error.CommonErrorCode;
 import com.ipseweb.exception.TrafficException;
-import com.ipseweb.traffic.domain.bus.BusStop;
+import com.ipseweb.traffic.domain.bus.entity.BusStop;
 import com.ipseweb.traffic.dto.busstop.BusStopDto;
 import com.ipseweb.traffic.dto.busstop.BusStopDto.BusStopResponse;
 import com.ipseweb.traffic.repository.busstop.BusStopRepository;

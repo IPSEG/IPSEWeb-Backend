@@ -1,6 +1,6 @@
 package com.ipseweb.traffic.repository.card;
 
-import com.ipseweb.traffic.domain.card.Card;
+import com.ipseweb.traffic.domain.card.entity.Card;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

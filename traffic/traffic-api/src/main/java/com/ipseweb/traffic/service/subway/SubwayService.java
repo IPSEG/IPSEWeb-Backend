@@ -1,13 +1,12 @@
 package com.ipseweb.traffic.service.subway;
 
 import com.ipseweb.error.Response;
-import com.ipseweb.traffic.domain.subway.SubwayLineInfo;
+import com.ipseweb.traffic.domain.subway.entity.SubwayLineInfo;
 import com.ipseweb.traffic.dto.subway.OpenApiStationArrivalData;
 import com.ipseweb.traffic.dto.subway.OpenApiStationArrivalResponse;
 import com.ipseweb.exception.ResponseEntityFactory;
 import com.ipseweb.traffic.repository.subway.SubwayLineInfoRepository;
 import com.ipseweb.util.Request;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service

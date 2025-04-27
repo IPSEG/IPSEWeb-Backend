@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.domain.base;
+package com.ipseweb.traffic.domain.base.entity;
 
 
 import jakarta.persistence.*;

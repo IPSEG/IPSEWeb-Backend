@@ -1,7 +1,7 @@
 package com.ipseweb.traffic.repository.busstop;
 
 
-import com.ipseweb.traffic.domain.bus.BusStop;
+import com.ipseweb.traffic.domain.bus.entity.BusStop;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

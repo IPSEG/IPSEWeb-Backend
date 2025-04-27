@@ -4,7 +4,6 @@ import com.ipseweb.traffic.dto.CustomUserDetails;
 import com.ipseweb.traffic.entity.User;
 import com.ipseweb.traffic.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.ipseweb.traffic.repository.busstop;
 
-import com.ipseweb.traffic.domain.bus.BusStop;
+import com.ipseweb.traffic.domain.bus.entity.BusStop;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.data.domain.Sort.*;
+import static org.springframework.data.domain.Sort.Direction;
 
 
 @SpringBootTest

@@ -1,4 +1,4 @@
-package com.ipseweb.traffic.resource.card.type;
+package com.ipseweb.traffic.domain.card.type;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

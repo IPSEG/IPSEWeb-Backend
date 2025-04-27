@@ -2,7 +2,7 @@ package com.ipseweb.traffic.service.cardgroup;
 
 import com.ipseweb.error.CardGroupErrorCode;
 import com.ipseweb.exception.CardGroupException;
-import com.ipseweb.traffic.domain.cardgroup.CardGroup;
+import com.ipseweb.traffic.domain.cardgroup.entity.CardGroup;
 import com.ipseweb.traffic.dto.card.CardDto;
 import com.ipseweb.traffic.dto.cardgroup.CardGroupDto;
 import com.ipseweb.traffic.dto.cardgroup.condition.CardGroupSearchCondition;

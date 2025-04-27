@@ -1,6 +1,6 @@
 package com.ipseweb.traffic.service.card.factory;
 
-import com.ipseweb.traffic.domain.card.Card;
+import com.ipseweb.traffic.domain.card.entity.Card;
 import com.ipseweb.traffic.dto.card.CardDto;
 
 public class TrafficCardFactory implements CardFactory{

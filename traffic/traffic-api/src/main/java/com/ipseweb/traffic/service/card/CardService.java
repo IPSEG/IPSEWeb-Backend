@@ -2,14 +2,13 @@ package com.ipseweb.traffic.service.card;
 
 import com.ipseweb.error.CardErrorCode;
 import com.ipseweb.exception.CardException;
-import com.ipseweb.traffic.domain.card.Card;
-import com.ipseweb.traffic.domain.cardgroup.CardGroup;
+import com.ipseweb.traffic.domain.card.entity.Card;
+import com.ipseweb.traffic.domain.cardgroup.entity.CardGroup;
 import com.ipseweb.traffic.dto.card.CardDto;
 import com.ipseweb.traffic.dto.card.visitor.CardToCardDetailDtoVisitor;
 import com.ipseweb.traffic.repository.card.CardRepository;
 import com.ipseweb.traffic.repository.card.SubwayArrivalCardRepository;
 import com.ipseweb.traffic.repository.cardgroup.CardGroupRepository;
-import com.ipseweb.traffic.resource.card.type.CardType;
 import com.ipseweb.traffic.service.card.factory.CardFactoryProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

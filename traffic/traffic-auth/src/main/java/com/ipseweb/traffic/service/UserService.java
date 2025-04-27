@@ -1,10 +1,10 @@
 package com.ipseweb.traffic.service;
 
+import com.ipseweb.traffic.domain.user.entity.User;
 import com.ipseweb.traffic.dto.CustomUserDetails;
 import com.ipseweb.traffic.dto.JoinUserRequest;
 import com.ipseweb.traffic.dto.LoginRequest;
 import com.ipseweb.traffic.dto.LoginResponse;
-import com.ipseweb.traffic.entity.User;
 import com.ipseweb.traffic.repository.UserRepository;
 import com.ipseweb.traffic.util.JwtUtil;
 import com.ipseweb.traffic.util.SecurityUtil;
@@ -51,8 +51,17 @@ public class UserService {
         String salt = securityUtil.generateSalt();
         String hashedPassword = securityUtil.hashPassword(decryptedPassword, salt);
 
+        User user = User.builder()
+                .userEmail(joinUserRequest.getUserEmail())
+                .userName(joinUserRequest.getUserName())
+                .userId(joinUserRequest.getUserId())
+                .userPassword(hashedPassword)
+                .userSalt(salt)
+                .build();
+
+
         //5. 사용자 정보 저장
-        userRepository.save(User.dtoToEntity(joinUserRequest, hashedPassword, salt));
+        userRepository.save(user);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

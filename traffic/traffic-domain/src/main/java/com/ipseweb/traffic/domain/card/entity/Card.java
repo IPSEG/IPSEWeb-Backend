@@ -1,11 +1,13 @@
-package com.ipseweb.traffic.domain.card;
+package com.ipseweb.traffic.domain.card.entity;
 
-import com.ipseweb.traffic.domain.base.BaseEntity;
-import com.ipseweb.traffic.domain.cardgroup.CardGroup;
-import com.ipseweb.traffic.dto.card.CardDto;
-import com.ipseweb.traffic.dto.card.visitor.CardVisitor;
+import com.ipseweb.traffic.domain.base.entity.BaseEntity;
+import com.ipseweb.traffic.domain.card.visitor.CardVisitor;
+import com.ipseweb.traffic.domain.cardgroup.entity.CardGroup;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
@@ -51,5 +53,7 @@ public abstract class Card extends BaseEntity {
     /**
      * visitor 위임 함수
      */
-    public abstract CardDto.CardDetail accept(CardVisitor visitor);
+
+    public abstract <R> R accept(CardVisitor<R> visitor);
+
 }
