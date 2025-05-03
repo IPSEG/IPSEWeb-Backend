@@ -1,6 +1,6 @@
 package com.ipseweb.traffic.service.card.factory;
 
-import com.ipseweb.traffic.resource.card.type.CardType;
+import com.ipseweb.traffic.domain.card.type.CardType;
 
 import java.util.HashMap;
 import java.util.Map;

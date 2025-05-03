@@ -1,8 +1,8 @@
 package com.ipseweb.traffic.repository.card;
 
-import com.ipseweb.traffic.domain.card.BusArrivalCard;
-import com.ipseweb.traffic.domain.card.Card;
-import com.ipseweb.traffic.domain.cardgroup.CardGroup;
+import com.ipseweb.traffic.domain.card.entity.BusArrivalCard;
+import com.ipseweb.traffic.domain.card.entity.Card;
+import com.ipseweb.traffic.domain.cardgroup.entity.CardGroup;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,12 +1,10 @@
 package com.ipseweb.traffic.service.busarrival;
 
-import com.ipseweb.error.Response;
 import com.ipseweb.traffic.dto.busarrival.BusArrivalDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.ResponseEntity;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -59,7 +57,7 @@ class BusArrivalOpenApiServiceTest {
     @Test
     @DisplayName("버스 도착 OPEN API 테스트2")
     public void busArrivalInfoOpenApiTest2() throws Exception {
-        ResponseEntity<Response<List<BusArrivalDto.BusArrivalInfoResponse>>> response = busArrivalOpenApiService.findBusArrivalInfo("DJB8001793", "25");
+        List<BusArrivalDto.BusArrivalInfoResponse> response = busArrivalOpenApiService.findBusArrivalInfo("DJB8001793", "25");
         System.out.println(response);
     }
 

@@ -1,6 +1,6 @@
 package com.ipseweb.traffic.repository.card;
 
-import com.ipseweb.traffic.domain.card.SubwayArrivalCard;
+import com.ipseweb.traffic.domain.card.entity.SubwayArrivalCard;
 import com.ipseweb.traffic.dto.card.CardDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -9,7 +9,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import java.util.List;
 
-import static com.ipseweb.traffic.domain.card.QSubwayArrivalCard.subwayArrivalCard;
+import static com.ipseweb.traffic.domain.card.entity.QSubwayArrivalCard.subwayArrivalCard;
 
 public class SubwayArrivalCardRepositoryQueryDslCustomImpl implements SubwayArrivalCardRepositoryQueryDslCustom {
     private final JPAQueryFactory queryFactory;

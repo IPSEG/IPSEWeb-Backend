@@ -2,11 +2,10 @@ package com.ipseweb.traffic.repository.busstop;
 
 import com.ipseweb.error.CommonErrorCode;
 import com.ipseweb.exception.TrafficException;
-import com.ipseweb.traffic.domain.bus.BusStop;
+import com.ipseweb.traffic.domain.bus.entity.BusStop;
 import com.ipseweb.traffic.dto.busstop.condition.BusStopSearchCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
-import static com.ipseweb.traffic.domain.bus.QBusStop.busStop;
+import static com.ipseweb.traffic.domain.bus.entity.QBusStop.busStop;
 import static org.springframework.util.StringUtils.hasLength;
 
 public class BusStopRepositoryQueryDslCustomImpl implements BusStopRepositoryQueryDslCustom{

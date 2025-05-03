@@ -1,12 +1,14 @@
-package com.ipseweb.traffic.domain.card;
+package com.ipseweb.traffic.domain.card.entity;
 
 
-import com.ipseweb.traffic.dto.card.CardDto;
-import com.ipseweb.traffic.dto.card.visitor.CardVisitor;
-import com.ipseweb.traffic.resource.card.type.CardType;
+import com.ipseweb.traffic.domain.card.type.CardType;
+import com.ipseweb.traffic.domain.card.visitor.CardVisitor;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
@@ -24,7 +26,7 @@ public class BusArrivalCard extends Card{
     private String busStopId;
 
     @Override
-    public CardDto.CardDetail accept(CardVisitor visitor) {
-        return visitor.visitor(this);
+    public <R> R accept(CardVisitor<R> visitor) {
+        return visitor.visit(this);
     }
 }

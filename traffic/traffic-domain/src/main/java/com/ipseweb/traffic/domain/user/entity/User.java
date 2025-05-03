@@ -1,6 +1,5 @@
-package com.ipseweb.traffic.entity;
+package com.ipseweb.traffic.domain.user.entity;
 
-import com.ipseweb.traffic.dto.JoinUserRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -44,13 +43,4 @@ public class User {
     @Comment("사용자 이메일 주소")
     private String userEmail;
 
-    public static User dtoToEntity(JoinUserRequest joinUserRequest, String decryptedPassword, String salt) {
-        return User.builder()
-                .userId(joinUserRequest.getUserId())
-                .userName(joinUserRequest.getUserName())
-                .userPassword(decryptedPassword)
-                .userSalt(salt)
-                .userEmail(joinUserRequest.getUserEmail())
-                .build();
-    }
 }

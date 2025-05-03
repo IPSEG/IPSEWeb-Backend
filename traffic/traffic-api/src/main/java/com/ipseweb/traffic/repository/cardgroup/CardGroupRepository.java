@@ -1,6 +1,6 @@
 package com.ipseweb.traffic.repository.cardgroup;
 
-import com.ipseweb.traffic.domain.cardgroup.CardGroup;
+import com.ipseweb.traffic.domain.cardgroup.entity.CardGroup;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

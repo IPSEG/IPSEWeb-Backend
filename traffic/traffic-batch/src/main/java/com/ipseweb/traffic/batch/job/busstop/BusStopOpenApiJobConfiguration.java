@@ -1,6 +1,6 @@
 package com.ipseweb.traffic.batch.job.busstop;
 
-import com.ipseweb.traffic.domain.BusStop;
+import com.ipseweb.traffic.domain.bus.entity.BusStop;
 import com.ipseweb.traffic.dto.busstop.OpenApiBusStopResponse;
 import com.ipseweb.traffic.service.busstop.BusStopJobService;
 import lombok.RequiredArgsConstructor;

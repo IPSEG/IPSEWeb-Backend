@@ -58,23 +58,31 @@ subprojects {
 
 project(':traffic-auth') {
     dependencies {
+        implementation project(':traffic-domain')
         compileOnly project(':traffic-common')
     }
 }
 
 project(':traffic-api') {
     dependencies {
+        implementation project(':traffic-domain')
         implementation project(':traffic-common')
     }
 }
 
 project(':traffic-batch') {
     dependencies {
+        implementation project(':traffic-domain')
         implementation project(':traffic-common')
     }
 }
 
 project(':traffic-common') {
+    bootJar { enabled = false }
+    jar { enabled = true }
+}
+
+project(':traffic-domain') {
     bootJar { enabled = false }
     jar { enabled = true }
 }

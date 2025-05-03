@@ -1,19 +1,16 @@
 package com.ipseweb.traffic.repository.cardgroup;
 
-import com.ipseweb.traffic.domain.card.QCard;
-import com.ipseweb.traffic.domain.cardgroup.CardGroup;
+import com.ipseweb.traffic.domain.cardgroup.entity.CardGroup;
 import com.ipseweb.traffic.dto.cardgroup.condition.CardGroupSearchCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.EntityManager;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.ipseweb.traffic.domain.card.QCard.*;
-import static com.ipseweb.traffic.domain.cardgroup.QCardGroup.cardGroup;
+import static com.ipseweb.traffic.domain.card.entity.QCard.card;
+import static com.ipseweb.traffic.domain.cardgroup.entity.QCardGroup.cardGroup;
 
 public class CardGroupRepositoryQueryDslCustomImpl implements CardGroupRepositoryQueryDslCustom {
 
