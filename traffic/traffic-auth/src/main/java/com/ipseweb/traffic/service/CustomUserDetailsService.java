@@ -1,7 +1,7 @@
 package com.ipseweb.traffic.service;
 
+import com.ipseweb.traffic.domain.user.entity.User;
 import com.ipseweb.traffic.dto.CustomUserDetails;
-import com.ipseweb.traffic.entity.User;
 import com.ipseweb.traffic.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
