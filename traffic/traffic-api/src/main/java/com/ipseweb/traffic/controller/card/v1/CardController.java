@@ -40,11 +40,11 @@ public class CardController {
                     @ApiResponse(description = "JPA 카드 목록 조회",
                             content = @Content(
                                     mediaType = "application/json",
-                                    schema = @Schema(implementation = CardDto.GetResponse.class)
+                                    schema = @Schema(implementation = CardDto.CardBasic.class)
                             ))
             })
     @GetMapping("/list")
-    public ResponseEntity<Response<List<CardDto.GetResponse>>> getCardList(CardDto.GetRequest getRequest) {
+    public ResponseEntity<Response<List<CardDto.CardBasic>>> getCardList(CardDto.GetRequest getRequest) {
         return ResponseEntityFactory.success(cardService.getCardList(getRequest));
     }
 

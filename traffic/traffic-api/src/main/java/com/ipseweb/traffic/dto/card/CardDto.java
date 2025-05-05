@@ -2,7 +2,6 @@ package com.ipseweb.traffic.dto.card;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.ipseweb.traffic.domain.card.entity.SubwayArrivalCard;
 import com.ipseweb.traffic.domain.card.type.CardType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,8 +22,6 @@ public class CardDto {
     public record MultipleCardIdAndNameResponse(List<CardIdAndNameResponse> list) {
     }
 
-
-
     @NoArgsConstructor
     @AllArgsConstructor
     @Data
@@ -33,11 +30,16 @@ public class CardDto {
         private String cardName;
         private Long cardGroupId;
         private CardType cardType;
+
+        // bus_stop
         private String busStopId;
         private String busStopName;
+        private String cityCode;
+
+        // subway
         private String subwayId;
         private String stationName;
-        private String cityCode;
+
     }
 
     @NoArgsConstructor
@@ -49,21 +51,45 @@ public class CardDto {
         private String stationName;
     }
 
+
     @NoArgsConstructor
     @AllArgsConstructor
     @Data
-    public static class GetResponse {
+    public static abstract class CardBasic {
         private Long cardId;
         private String cardName;
         private String userId;
+
+
+
+    }
+
+    @Data
+    @NoArgsConstructor
+    public static class SubwayArrivalCardBasic extends CardBasic {
+
         private String stationName;
 
-        public GetResponse(SubwayArrivalCard card) {
-            this.cardId = card.getCardId();
-            this.cardName = card.getCardName();
-            this.userId = card.getUserId();
-            this.stationName = card.getStationName();
+        public SubwayArrivalCardBasic(Long cardId, String cardName, String userId, String subwayStationName) {
+            super(cardId, cardName, userId);
+            this.stationName = subwayStationName;
         }
+    }
+
+    @Data
+    @NoArgsConstructor
+    public static class BusArrivalCardBasic extends CardBasic {
+        private String busStopName;
+        private String cityCode;
+        private String busStopId;
+
+        public BusArrivalCardBasic(Long cardId, String cardName, String userId, String busStopId, String busStopName, String cityCode) {
+            super(cardId, cardName, userId);
+            this.busStopId = busStopId;
+            this.busStopName = busStopName;
+            this.cityCode = cityCode;
+        }
+
     }
 
 
