@@ -6,6 +6,7 @@ import com.ipseweb.traffic.domain.bus.entity.BusStop;
 import com.ipseweb.traffic.dto.busstop.condition.BusStopSearchCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -16,13 +17,11 @@ import java.util.Optional;
 import static com.ipseweb.traffic.domain.bus.entity.QBusStop.busStop;
 import static org.springframework.util.StringUtils.hasLength;
 
+@RequiredArgsConstructor
 public class BusStopRepositoryQueryDslCustomImpl implements BusStopRepositoryQueryDslCustom{
 
     private final JPAQueryFactory queryFactory;
 
-    public BusStopRepositoryQueryDslCustomImpl(JPAQueryFactory queryFactory) {
-        this.queryFactory = queryFactory;
-    }
 
     @Override
     public Optional<BusStop> searchBusStop(BusStopSearchCondition condition) {

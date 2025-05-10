@@ -1,5 +1,6 @@
 package com.ipseweb.traffic.util;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -15,12 +16,11 @@ import java.util.Base64;
 
 @Component
 public class SecurityUtil {
-
     private RedisTemplate redisTemplate;
     private KeyFactory keyFactory;
     private Cipher cipher;
 
-    public SecurityUtil(RedisTemplate redisTemplate) {
+    public SecurityUtil(@Qualifier("redisTemplate") RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
         try {
             this.keyFactory = KeyFactory.getInstance("RSA");

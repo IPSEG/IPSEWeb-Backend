@@ -1,20 +1,29 @@
 package com.ipseweb.traffic.service.card;
 
 import com.ipseweb.error.CardErrorCode;
+import com.ipseweb.error.CardGroupErrorCode;
+import com.ipseweb.error.UserErrorCode;
 import com.ipseweb.exception.CardException;
+import com.ipseweb.exception.CardGroupException;
+import com.ipseweb.exception.UserException;
 import com.ipseweb.traffic.domain.card.entity.Card;
 import com.ipseweb.traffic.domain.cardgroup.entity.CardGroup;
+import com.ipseweb.traffic.domain.user.entity.User;
 import com.ipseweb.traffic.dto.card.CardDto;
+import com.ipseweb.traffic.dto.card.condition.CardSearchCondition;
+import com.ipseweb.traffic.dto.card.visitor.CardToCardBasicDtoVisitor;
 import com.ipseweb.traffic.dto.card.visitor.CardToCardDetailDtoVisitor;
 import com.ipseweb.traffic.repository.card.CardRepository;
-import com.ipseweb.traffic.repository.card.SubwayArrivalCardRepository;
 import com.ipseweb.traffic.repository.cardgroup.CardGroupRepository;
+import com.ipseweb.traffic.repository.user.UserRepository;
 import com.ipseweb.traffic.service.card.factory.CardFactoryProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +32,7 @@ public class CardService {
 
     private final CardRepository cardRepository;
     private final CardGroupRepository cardGroupRepository;
-    private final SubwayArrivalCardRepository subwayArrivalCardRepository;
+    private final UserRepository userRepository;
 
     /**
      * 카드 상세 정보 조회
@@ -42,16 +51,16 @@ public class CardService {
      * @param getRequest
      * @return
      */
-    public List<CardDto.GetResponse> getCardList(CardDto.GetRequest getRequest) {
+    public List<CardDto.CardBasic> getCardList(CardDto.GetRequest getRequest) {
         // request 정보 기반으로 카드 목록 조회
-        List<CardDto.GetResponse> result = subwayArrivalCardRepository.findCards(getRequest);
+        List<Card> findCardList = cardRepository.searchCardAllByCondition(new CardSearchCondition(getRequest.getUserId()));
 
-        if(result == null || result.isEmpty()) {
+        if(findCardList == null || findCardList.isEmpty()) {
             log.error("Card is not exist. request Info : {}", getRequest);
             throw new CardException(CardErrorCode.CARD_IS_NOT_EXIST);
         }
 
-        return result;
+        return findCardList.stream().map( c -> c.accept(new CardToCardBasicDtoVisitor())).collect(Collectors.toList());
     }
 
     /**
@@ -59,23 +68,20 @@ public class CardService {
      * @param addRequest
      */
     public void addCard(CardDto.AddRequest addRequest) {
-        // userId, stationName으로 이미 등록된 정보가 있는지 조회
-        Card searchCard = subwayArrivalCardRepository.findCardByStationNameAndUserId(addRequest);
+        cardRepository.searchCard(addRequest).ifPresent(card -> {
+                    throw new CardException(CardErrorCode.CARD_IS_ALREADY_EXIST);
+                }
+        );
 
-        if(searchCard != null) {
-            throw new CardException(CardErrorCode.CARD_IS_ALREADY_EXIST);
-        }
+        // CardGroup 조회
+        CardGroup findCardGroup = cardGroupRepository.findById(addRequest.getCardGroupId())
+                .orElseThrow(() -> new CardGroupException(CardGroupErrorCode.CARD_GROUP_IS_NOT_EXIST));
 
-        // addRequest의 cardGroupId 정보 조회 cardGroup 정보를 전달 안했을 시 default 값 지정
-        CardGroup cardGroup = cardGroupRepository.findById(1L).orElse(null);
-
-        // TODO : 임시로 1 설정하도록 지정 추후 카드 그룹 관리 서비스 추가 필요
-        if(cardGroup == null) {
-            addRequest.setCardGroupId(1L);
-        }
+        // User 조회
+        User findUser = userRepository.findById(addRequest.getUserId()).orElseThrow(() -> new UserException(UserErrorCode.USER_NOT_FOUND));
 
         // Card Entity 생성 및 저장
-        Card card = CardFactoryProvider.getFactory(addRequest.getCardType()).createCard(addRequest);
+        Card card = CardFactoryProvider.getFactory(addRequest.getCardType()).createCard(addRequest, findUser, findCardGroup);
         cardRepository.save(card);
     }
 }
