@@ -1,6 +1,7 @@
 package com.ipseweb.traffic.service;
 
 import com.ipseweb.traffic.dto.RsaResponse;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class RsaService {
     private KeyFactory keyFactory;
     private RedisTemplate redisTemplate;
 
-    public RsaService(RedisTemplate redisTemplate) {
+    public RsaService(@Qualifier("redisTemplate")RedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
         try {
             this.keyPairGenerator = KeyPairGenerator.getInstance("RSA");

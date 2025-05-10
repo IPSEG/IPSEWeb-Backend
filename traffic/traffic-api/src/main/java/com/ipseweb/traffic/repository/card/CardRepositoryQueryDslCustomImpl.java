@@ -4,6 +4,8 @@ import com.ipseweb.traffic.domain.card.entity.Card;
 import com.ipseweb.traffic.dto.card.CardDto;
 import com.ipseweb.traffic.dto.card.condition.CardSearchCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.NumberPath;
+import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -35,9 +37,9 @@ public class CardRepositoryQueryDslCustomImpl implements CardRepositoryQueryDslC
                                 .join(subwayArrivalCard.user, user)
                                 .fetchJoin()
                                 .where(
-                                        userIdEq(add.getUserId()),
-                                        cardNameEq(add.getCardName()),
-                                        cardGroupIdEq(add.getCardGroupId()),
+                                        userIdEq(add.getUserId(), subwayArrivalCard.user.userId),
+                                        cardNameEq(add.getCardName(), subwayArrivalCard.cardName),
+                                        cardGroupIdEq(add.getCardGroupId(), subwayArrivalCard.cardGroup.id),
                                         subwayStationNameEq(add.getStationName())
                                 )
                                 .fetchOne()
@@ -47,13 +49,13 @@ public class CardRepositoryQueryDslCustomImpl implements CardRepositoryQueryDslC
                 return Optional.ofNullable(
                         queryFactory
                                 .selectFrom(busArrivalCard)
-                                .join(busArrivalCard.cardGroup, cardGroup)
-                                .join(busArrivalCard.user, user)
+                                .join(busArrivalCard.cardGroup)
+                                .join(busArrivalCard.user)
                                 .fetchJoin()
                                 .where(
-                                        userIdEq(add.getUserId()),
-                                        cardNameEq(add.getCardName()),
-                                        cardGroupIdEq(add.getCardGroupId()),
+                                        userIdEq(add.getUserId(), busArrivalCard.user.userId),
+                                        cardNameEq(add.getCardName(), busArrivalCard.cardName),
+                                        cardGroupIdEq(add.getCardGroupId(), busArrivalCard.cardGroup.id),
                                         busStopIdEq(add.getBusStopId()),
                                         busStopNameEq(add.getBusStopName()),
                                         busStopCityCodeEq(add.getCityCode())
@@ -73,7 +75,7 @@ public class CardRepositoryQueryDslCustomImpl implements CardRepositoryQueryDslC
     public List<Card> searchCardAllByCondition(CardSearchCondition condition) {
         return queryFactory
                 .selectFrom(card)
-                .where(userIdEq(condition.getUserId()))
+                .where(userIdEq(condition.getUserId(), card.user.userId))
                 .fetch();
     }
 
@@ -91,16 +93,16 @@ public class CardRepositoryQueryDslCustomImpl implements CardRepositoryQueryDslC
         return hasLength(subwayStationName) ? subwayArrivalCard.stationName.eq(subwayStationName) : null;
     }
 
-    private BooleanExpression cardGroupIdEq(Long cardGroupId) {
-        return cardGroupId == null ? null : card.cardGroup.id.eq(cardGroupId);
+    private BooleanExpression cardGroupIdEq(Long cardGroupId, NumberPath<Long> cardGroupIdPath) {
+        return cardGroupId == null ? null : cardGroupIdPath.eq(cardGroupId);
     }
 
 
-    private BooleanExpression userIdEq(String userId) {
-        return hasLength(userId) ? card.user.userId.eq(userId) : null;
+    private BooleanExpression userIdEq(String userId, StringPath userIdPath) {
+        return hasLength(userId) ? userIdPath.eq(userId) : null;
     }
 
-    private BooleanExpression cardNameEq(String cardName) {
-        return hasLength(cardName) ? card.cardName.eq(cardName) : null;
+    private BooleanExpression cardNameEq(String cardName, StringPath cardNamePath) {
+        return hasLength(cardName) ? cardNamePath.eq(cardName) : null;
     }
 }
