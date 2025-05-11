@@ -16,7 +16,6 @@ import static com.ipseweb.traffic.domain.card.entity.QBusArrivalCard.busArrivalC
 import static com.ipseweb.traffic.domain.card.entity.QCard.card;
 import static com.ipseweb.traffic.domain.card.entity.QSubwayArrivalCard.subwayArrivalCard;
 import static com.ipseweb.traffic.domain.cardgroup.entity.QCardGroup.cardGroup;
-import static com.ipseweb.traffic.domain.user.entity.QUser.user;
 import static org.springframework.util.StringUtils.hasLength;
 
 @RequiredArgsConstructor
@@ -34,10 +33,9 @@ public class CardRepositoryQueryDslCustomImpl implements CardRepositoryQueryDslC
                         queryFactory
                                 .selectFrom(subwayArrivalCard)
                                 .join(subwayArrivalCard.cardGroup, cardGroup)
-                                .join(subwayArrivalCard.user, user)
                                 .fetchJoin()
                                 .where(
-                                        userIdEq(add.getUserId(), subwayArrivalCard.user.userId),
+                                        userIdEq(add.getUserId(), subwayArrivalCard.userId),
                                         cardNameEq(add.getCardName(), subwayArrivalCard.cardName),
                                         cardGroupIdEq(add.getCardGroupId(), subwayArrivalCard.cardGroup.id),
                                         subwayStationNameEq(add.getStationName())
@@ -50,10 +48,9 @@ public class CardRepositoryQueryDslCustomImpl implements CardRepositoryQueryDslC
                         queryFactory
                                 .selectFrom(busArrivalCard)
                                 .join(busArrivalCard.cardGroup)
-                                .join(busArrivalCard.user)
                                 .fetchJoin()
                                 .where(
-                                        userIdEq(add.getUserId(), busArrivalCard.user.userId),
+                                        userIdEq(add.getUserId(), busArrivalCard.userId),
                                         cardNameEq(add.getCardName(), busArrivalCard.cardName),
                                         cardGroupIdEq(add.getCardGroupId(), busArrivalCard.cardGroup.id),
                                         busStopIdEq(add.getBusStopId()),
@@ -75,7 +72,7 @@ public class CardRepositoryQueryDslCustomImpl implements CardRepositoryQueryDslC
     public List<Card> searchCardAllByCondition(CardSearchCondition condition) {
         return queryFactory
                 .selectFrom(card)
-                .where(userIdEq(condition.getUserId(), card.user.userId))
+                .where(userIdEq(condition.getUserId(), card.userId))
                 .fetch();
     }
 

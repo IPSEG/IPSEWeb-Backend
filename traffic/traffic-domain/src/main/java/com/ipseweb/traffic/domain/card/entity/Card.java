@@ -3,7 +3,6 @@ package com.ipseweb.traffic.domain.card.entity;
 import com.ipseweb.traffic.domain.base.entity.BaseEntity;
 import com.ipseweb.traffic.domain.card.visitor.CardVisitor;
 import com.ipseweb.traffic.domain.cardgroup.entity.CardGroup;
-import com.ipseweb.traffic.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -31,9 +30,8 @@ public abstract class Card extends BaseEntity {
     @Column(name = "card_name")
     private String cardName;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private String userId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "card_group_id")

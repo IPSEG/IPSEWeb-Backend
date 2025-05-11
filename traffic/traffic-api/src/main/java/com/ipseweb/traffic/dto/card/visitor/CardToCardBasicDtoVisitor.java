@@ -13,7 +13,7 @@ public class CardToCardBasicDtoVisitor implements CardVisitor<CardDto.CardBasic>
         return new CardDto.BusArrivalCardBasic(
                 busArrivalCard.getCardId(),
                 busArrivalCard.getCardName(),
-                busArrivalCard.getUser().getUserId(),
+                busArrivalCard.getUserId(),
                 busArrivalCard.getBusStopId(),
                 busArrivalCard.getBusStopName(),
                 busArrivalCard.getCityCode()
@@ -25,7 +25,7 @@ public class CardToCardBasicDtoVisitor implements CardVisitor<CardDto.CardBasic>
         return new CardDto.SubwayArrivalCardBasic(
                 subwayArrivalCard.getCardId(),
                 subwayArrivalCard.getCardName(),
-                subwayArrivalCard.getUser().getUserId(),
+                subwayArrivalCard.getUserId(),
                 subwayArrivalCard.getStationName()
         );
     }
