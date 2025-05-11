@@ -2,13 +2,10 @@ package com.ipseweb.traffic.service.card;
 
 import com.ipseweb.error.CardErrorCode;
 import com.ipseweb.error.CardGroupErrorCode;
-import com.ipseweb.error.UserErrorCode;
 import com.ipseweb.exception.CardException;
 import com.ipseweb.exception.CardGroupException;
-import com.ipseweb.exception.UserException;
 import com.ipseweb.traffic.domain.card.entity.Card;
 import com.ipseweb.traffic.domain.cardgroup.entity.CardGroup;
-import com.ipseweb.traffic.domain.user.entity.User;
 import com.ipseweb.traffic.dto.card.CardDto;
 import com.ipseweb.traffic.dto.card.condition.CardSearchCondition;
 import com.ipseweb.traffic.dto.card.visitor.CardToCardBasicDtoVisitor;
@@ -77,11 +74,9 @@ public class CardService {
         CardGroup findCardGroup = cardGroupRepository.findById(addRequest.getCardGroupId())
                 .orElseThrow(() -> new CardGroupException(CardGroupErrorCode.CARD_GROUP_IS_NOT_EXIST));
 
-        // User 조회
-        User findUser = userRepository.findById(addRequest.getUserId()).orElseThrow(() -> new UserException(UserErrorCode.USER_NOT_FOUND));
 
         // Card Entity 생성 및 저장
-        Card card = CardFactoryProvider.getFactory(addRequest.getCardType()).createCard(addRequest, findUser, findCardGroup);
+        Card card = CardFactoryProvider.getFactory(addRequest.getCardType()).createCard(addRequest, findCardGroup);
         cardRepository.save(card);
     }
 }
