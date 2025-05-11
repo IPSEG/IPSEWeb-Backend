@@ -30,6 +30,7 @@ public abstract class Card extends BaseEntity {
     @Column(name = "card_name")
     private String cardName;
 
+    @Column(name = "user_id")
     private String userId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
