@@ -14,12 +14,8 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,20 +27,18 @@ public class CardGroupController {
 
     private final CardGroupService cardGroupService;
 
-    @Operation(summary = "카드 이름으로 카드 목록 조회", description = "v1, 카드 이름으로 카드 목록을 조회합니다.",
+    @Operation(summary = "카드 그룹 조회", description = "v1, 카드 그룹 조회",
             responses = {
-                    @ApiResponse(description = "JPA 버스 정류장 검색",
+                    @ApiResponse(description = "JPA 카드 그룹 조회",
                             content = @Content(
                                     mediaType = "application/json",
                                     schema = @Schema(implementation = CardGroupDto.CardGroupResponse.class)
                             ))
             })
     @GetMapping
-    public ResponseEntity<Response<List<CardGroupDto.CardGroupResponse>>> getCardGroupList(@Param("name") String name) {
-        CardGroupSearchCondition condition = new CardGroupSearchCondition(name);
-        return ResponseEntityFactory.success(cardGroupService.getCardGroupList(condition));
+    public ResponseEntity<Response<List<CardGroupDto.CardGroupResponse>>> getCardGroupList() {
+        return ResponseEntityFactory.success(cardGroupService.getCardGroupList(new CardGroupSearchCondition()));
     }
-
 
     @Operation(summary = "카드 그룹 생성", description = "v1, 카드 그룹을 생성합니다.",
             responses = {

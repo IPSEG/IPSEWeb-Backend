@@ -2,6 +2,7 @@ package com.ipseweb.traffic.service.cardgroup;
 
 import com.ipseweb.error.CardGroupErrorCode;
 import com.ipseweb.exception.CardGroupException;
+import com.ipseweb.traffic.domain.card.type.CardType;
 import com.ipseweb.traffic.domain.cardgroup.entity.CardGroup;
 import com.ipseweb.traffic.dto.card.CardDto;
 import com.ipseweb.traffic.dto.cardgroup.CardGroupDto;
@@ -31,13 +32,15 @@ public class CardGroupService {
                         cg -> new CardGroupDto.CardGroupResponse(
                                 cg.getId(),
                                 cg.getName(),
-                                new CardDto.MultipleCardIdAndNameResponse(
+                                (
                                         cg.getCardList()
                                                 .stream()
                                                 .map(c ->
                                                         new CardDto.CardIdAndNameResponse(
                                                                 c.getCardId(),
-                                                                c.getCardName())
+                                                                c.getCardName(),
+                                                                CardType.from(c.getCardType())
+                                                                )
                                                 ).collect(Collectors.toList())
                                 )
                         )

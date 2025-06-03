@@ -28,7 +28,7 @@ public class CardGroupRepositoryQueryDslCustomImpl implements CardGroupRepositor
                 .where(
                         cardGroupNameEq(condition.getCardGroupName())
                 )
-                .join(cardGroup.cardList, card)
+                .leftJoin(cardGroup.cardList, card)
                 .fetchJoin()
                 .stream()
                 .collect(Collectors.toList());

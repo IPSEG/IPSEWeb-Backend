@@ -15,12 +15,9 @@ import java.util.List;
 public class CardDto {
 
 
-    public record CardIdAndNameResponse(Long id, String name) {
+    public record CardIdAndNameResponse(Long id, String name, CardType cardType) {
     }
     ;
-
-    public record MultipleCardIdAndNameResponse(List<CardIdAndNameResponse> list) {
-    }
 
     @NoArgsConstructor
     @AllArgsConstructor
