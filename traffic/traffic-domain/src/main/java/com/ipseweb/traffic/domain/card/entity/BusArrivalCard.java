@@ -25,6 +25,10 @@ public class BusArrivalCard extends Card{
 
     private String busStopId;
 
+    private String city;
+
+    private String detailCity;
+
     @Override
     public <R> R accept(CardVisitor<R> visitor) {
         return visitor.visit(this);

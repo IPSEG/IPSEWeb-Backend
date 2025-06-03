@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CardGroupDto {
-    public record CardGroupResponse(Long id, String name, List<CardDto.CardIdAndNameResponse> cards) {
+    public record CardGroupResponse(Long id, String name, List<CardDto.CardBasic> cards) {
 
     };
 

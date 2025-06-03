@@ -15,7 +15,7 @@ import java.util.List;
 public class CardDto {
 
 
-    public record CardIdAndNameResponse(Long id, String name, CardType cardType) {
+    public record CardIdAndNameResponse(Long id, String name, CardType cardType, String detailCity) {
     }
     ;
 
@@ -32,6 +32,8 @@ public class CardDto {
         private String busStopId;
         private String busStopName;
         private String cityCode;
+        private String city;
+        private String detailCity;
 
         // subway
         private String subwayId;
@@ -56,9 +58,7 @@ public class CardDto {
         private Long cardId;
         private String cardName;
         private String userId;
-
-
-
+        private CardType cardType;
     }
 
     @Data
@@ -67,9 +67,9 @@ public class CardDto {
 
         private String stationName;
 
-        public SubwayArrivalCardBasic(Long cardId, String cardName, String userId, String subwayStationName) {
-            super(cardId, cardName, userId);
-            this.stationName = subwayStationName;
+        public SubwayArrivalCardBasic(Long cardId, String cardName, String userId, CardType cardType, String stationName) {
+            super(cardId, cardName, userId, cardType);
+            this.stationName = stationName;
         }
     }
 
@@ -77,16 +77,21 @@ public class CardDto {
     @NoArgsConstructor
     public static class BusArrivalCardBasic extends CardBasic {
         private String busStopName;
+        private String detailCity;
+        private String city;
         private String cityCode;
         private String busStopId;
 
-        public BusArrivalCardBasic(Long cardId, String cardName, String userId, String busStopId, String busStopName, String cityCode) {
-            super(cardId, cardName, userId);
-            this.busStopId = busStopId;
+        public BusArrivalCardBasic(Long cardId, String cardName, String userId,
+                                   CardType cardType, String busStopName, String detailCity,
+                                   String city, String cityCode, String busStopId) {
+            super(cardId, cardName, userId, cardType);
             this.busStopName = busStopName;
+            this.detailCity = detailCity;
+            this.city = city;
             this.cityCode = cityCode;
+            this.busStopId = busStopId;
         }
-
     }
 
 
