@@ -33,6 +33,12 @@ public abstract class Card extends BaseEntity {
     @Column(name = "user_id")
     private String userId;
 
+    /**
+     * Discriminator 컬럼 명시적 매핑 (읽기 전용)
+     */
+    @Column(name = "card_type", insertable = false, updatable = false)
+    private String cardType;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "card_group_id")
     private CardGroup cardGroup;

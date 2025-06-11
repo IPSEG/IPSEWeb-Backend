@@ -2,6 +2,7 @@ package com.ipseweb.traffic.dto.card.visitor;
 
 import com.ipseweb.traffic.domain.card.entity.BusArrivalCard;
 import com.ipseweb.traffic.domain.card.entity.SubwayArrivalCard;
+import com.ipseweb.traffic.domain.card.type.CardType;
 import com.ipseweb.traffic.domain.card.visitor.CardVisitor;
 import com.ipseweb.traffic.dto.card.CardDto;
 
@@ -14,9 +15,12 @@ public class CardToCardBasicDtoVisitor implements CardVisitor<CardDto.CardBasic>
                 busArrivalCard.getCardId(),
                 busArrivalCard.getCardName(),
                 busArrivalCard.getUserId(),
-                busArrivalCard.getBusStopId(),
+                CardType.from(busArrivalCard.getCardType()),
                 busArrivalCard.getBusStopName(),
-                busArrivalCard.getCityCode()
+                busArrivalCard.getDetailCity(),
+                busArrivalCard.getCity(),
+                busArrivalCard.getCityCode(),
+                busArrivalCard.getBusStopId()
         );
     }
 
@@ -26,6 +30,7 @@ public class CardToCardBasicDtoVisitor implements CardVisitor<CardDto.CardBasic>
                 subwayArrivalCard.getCardId(),
                 subwayArrivalCard.getCardName(),
                 subwayArrivalCard.getUserId(),
+                CardType.from(subwayArrivalCard.getCardType()),
                 subwayArrivalCard.getStationName()
         );
     }

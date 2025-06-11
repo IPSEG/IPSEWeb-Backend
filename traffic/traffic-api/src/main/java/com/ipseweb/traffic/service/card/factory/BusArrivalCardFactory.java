@@ -14,6 +14,8 @@ public class BusArrivalCardFactory implements CardFactory{
                 .cardName(getRequest.getCardName())
                 .busStopName(getRequest.getBusStopName())
                 .cityCode(getRequest.getCityCode())
+                .city(getRequest.getCity())
+                .detailCity(getRequest.getDetailCity())
                 .busStopId(getRequest.getBusStopId())
                 .userId(getRequest.getUserId())
                 .build();
